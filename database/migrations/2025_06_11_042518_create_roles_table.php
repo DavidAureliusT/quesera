@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
         });
 
-        DB::table('roles')->inserts(
+        DB::table('roles')->insert(
             ['name' => 'Administrator'],
             ['name' => 'Member'],
             ['name' => 'Viewer'],
