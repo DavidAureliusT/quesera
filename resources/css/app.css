@@ -164,4 +164,10 @@
     body {
         @apply bg-background text-foreground;
     }
+    h1 {
+        @apply font-bold text-[3em] uppercase;
+    }
+    p {
+        @apply text-[.8em] leading-[1.8em] tracking-[.01em];
+    }
 }
