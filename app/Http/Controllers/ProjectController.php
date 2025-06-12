@@ -13,7 +13,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Project');
+        return Inertia::render('Projects');
     }
 
     /**
@@ -44,7 +44,9 @@ class ProjectController extends Controller
      */
     public function show(String $key)
     {
-        return Inertia::render('projects/Show', ['project' => Project::where('key', $key)->first()]);
+        return Inertia::render('projects/Show', [
+            'project' => Project::where('key', $key)->first()
+        ]);
     }
 
     /**
