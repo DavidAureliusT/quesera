@@ -13,7 +13,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Projects');
+        return Inertia::render('Projects', [
+            'projects' => Project::all()->select(['id', 'name', 'key'])
+        ]);
     }
 
     /**
@@ -36,7 +38,12 @@ class ProjectController extends Controller
 
         $project = Project::create($validated);
 
-        return redirect(route('projects.show', ['key' => $project->key]));
+        return redirect(
+            route(
+                name: 'projects.show',
+                parameters: ['key' => $project->key]
+            )
+        );
     }
 
     /**

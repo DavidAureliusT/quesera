@@ -4,10 +4,17 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { LoaderCircle } from 'lucide-vue-next';
 import InputError from '@/components/InputError.vue';
+import TextLink from "@/components/TextLink.vue";
 import SandboxLayout from '@/layouts/SandboxLayout.vue';
+
 
 import { Head, useForm } from '@inertiajs/vue3';
 import { watch, ref } from 'vue';
+
+const allProjects = {
+    title: 'Back to all projects',
+    href: '/projects'
+};
 
 const form = useForm({
     name: '',
@@ -67,6 +74,7 @@ watch(() => form.name, (newProjectName) => {
     <Head title="Create board"></Head>
     <SandboxLayout>
         <main class="flex flex-col max-w-[560px]">
+            <TextLink :href="allProjects.href">{{ allProjects.title }}</TextLink>
             <form @submit.prevent="submit" class="flex flex-col gap-2">
                 <div class="">
                     <h1 class="dark:text-[#EDEDEC]">Project</h1>

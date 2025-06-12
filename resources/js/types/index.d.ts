@@ -35,4 +35,10 @@ export interface User {
     updated_at: string;
 }
 
+export interface Project {
+    id: number;
+    name: string;
+    key: string;
+}
+
 export type BreadcrumbItemType = BreadcrumbItem;
