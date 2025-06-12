@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('icon');
             $table->string('name', length: 120);
-            $table->string('project_key');
+            $table->string('key');
+            $table->string('icon_color')->nullable(true);
             $table->string('description', length: 255)->nullable(true);
             $table->timestamps();
         });

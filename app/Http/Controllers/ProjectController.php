@@ -29,15 +29,22 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'max:120'],
+            'key' => ['required', 'unique:projects'],
+        ]);
+
+        $project = Project::create($validated);
+
+        return redirect(route('projects.show', ['key' => $project->key]));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show(String $key)
     {
-        //
+        return Inertia::render('projects/Show', ['project' => Project::where('key', $key)->first()]);
     }
 
     /**

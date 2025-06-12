@@ -10,13 +10,17 @@ import { Head, useForm } from '@inertiajs/vue3';
 import { watch, ref } from 'vue';
 
 const form = useForm({
-    project_name: '',
-    project_key: '',
+    name: '',
+    key: '',
 });
 
 const userEditedProjectKey = ref(false);
 
 let projectNameTimer: ReturnType<typeof setTimeout> | null = null;
+
+const submit = () => {
+    form.post(route('projects.store'));
+};
 
 function getAutoFillProjectKey(project_name: string): string {
     let project_key = "";
@@ -32,39 +36,35 @@ function getAutoFillProjectKey(project_name: string): string {
     return project_key.toUpperCase();
 }
 
-watch(() => form.project_key, (newProjectKey) => {
-    userEditedProjectKey.value = newProjectKey !== getAutoFillProjectKey(form.project_name);
+watch(() => form.key, (newProjectKey) => {
+    userEditedProjectKey.value = newProjectKey !== getAutoFillProjectKey(form.name);
 });
 
-watch(() => form.project_name, (newProjectName) => {
+watch(() => form.name, (newProjectName) => {
     if (projectNameTimer) {
         clearTimeout(projectNameTimer);
     }
     if (newProjectName) {
         projectNameTimer = setTimeout(() => {
             if (!userEditedProjectKey.value) {
-                form.project_key = getAutoFillProjectKey(newProjectName);
+                form.key = getAutoFillProjectKey(newProjectName);
             }
-            if (!form.project_key && newProjectName) {
-                form.project_key = getAutoFillProjectKey(newProjectName);
+            if (!form.key && newProjectName) {
+                form.key = getAutoFillProjectKey(newProjectName);
             }
         }, 1000);
     } else {
         if (!userEditedProjectKey.value) {
-            form.project_key = '';
+            form.key = '';
         }
     }
 });
-
-const submit = () => {
-    form.post(route('projects.store'));
-};
 
 </script>
 
 <template>
 
-    <Head title="SMPL board"></Head>
+    <Head title="Create board"></Head>
     <SandboxLayout>
         <main class="flex flex-col max-w-[560px]">
             <form @submit.prevent="submit" class="flex flex-col gap-2">
@@ -78,14 +78,14 @@ const submit = () => {
                 </div>
                 <div class="flex flex-col gap-[1.2em] pt-[.8em] pb-[1.2em]">
                     <div class="gap-2 grid">
-                        <Label for="project_name">Name {{ form.project_name.trim().split(' ').length }}<span aria-hidden="true" title="required" class="text-orange-600">*</span></Label>
-                        <Input id="project_name" class="" type="text" required autofocus :tabindex="1" autocomplete="project_name" v-model="form.project_name" placeholder="Try a team name, project goal, milestone..." />
-                        <InputError :message="form.errors.project_name" />
+                        <Label for="project_name">Name<span aria-hidden="true" title="required" class="text-orange-600">*</span></Label>
+                        <Input id="project_name" class="" type="text" required autofocus :tabindex="1" autocomplete="project_name" v-model="form.name" placeholder="Try a team name, project goal, milestone..." />
+                        <InputError :message="form.errors.name" />
                     </div>
                     <div class="gap-2 grid">
                         <Label for="project_key">Key<span aria-hidden="true" title="required" class="text-orange-600">*</span></Label>
-                        <Input id="project_key" class="w-[100px]" type="text" required autofocus :tabindex="1" autocomplete="project_key" v-model="form.project_key" />
-                        <InputError :message="form.errors.project_key" />
+                        <Input id="project_key" class="w-[100px]" type="text" required autofocus :tabindex="1" autocomplete="project_key" v-model="form.key" />
+                        <InputError :message="form.errors.key" />
                     </div>
                 </div>
                 <Button type="submit" class="flex-none" :tabindex="4" :disabled="form.processing">
@@ -95,4 +95,5 @@ const submit = () => {
             </form>
         </main>
     </SandboxLayout>
+
 </template>

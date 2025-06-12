@@ -12,9 +12,9 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'icon',
         'name',
-        'project_key',
+        'key',
+        'icon_color',
         'description',
     ];
 

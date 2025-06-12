@@ -8,7 +8,9 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('home');
 
-Route::resource('projects', ProjectController::class)->only(['index', 'create']);
+Route::resource('projects', ProjectController::class)
+    ->only(['index', 'create', 'store', 'show'])
+    ->parameters(['projects' => 'key']);
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
