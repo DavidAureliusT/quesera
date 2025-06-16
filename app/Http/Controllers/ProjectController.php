@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\TaskResource;
 use App\Models\Project;
+use App\Models\Workflow;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -34,14 +35,28 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'type' => ['required'],
             'name' => ['required', 'max:120'],
             'key' => ['required', 'unique:projects'],
         ]);
 
-        $project = Project::factory()
-            ->scrum()
-            ->state($validated)
-            ->create();
+        $project = Project::create($validated);
+
+        if ($validated['type'] == 'basic') {
+            $project->workflows()->saveMany([
+                new Workflow(['name' => 'To do']),
+                new Workflow(['name' => 'In Progress']),
+                new Workflow(['name' => 'Done']),
+            ]);
+        } else if ($validated['type'] == 'scrum') {
+            $project->workflows()->saveMany([
+                new Workflow(['name' => 'Backlog']),
+                new Workflow(['name' => 'Sprint']),
+                new Workflow(['name' => 'In Progress']),
+                new Workflow(['name' => 'Review']),
+                new Workflow(['name' => 'Done']),
+            ]);
+        }
 
         return to_route(
             route: 'projects.show',

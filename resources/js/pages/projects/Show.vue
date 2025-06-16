@@ -5,7 +5,6 @@ import TextLink from "@/components/TextLink.vue";
 import SandboxLayout from '@/layouts/SandboxLayout.vue';
 import { Badge } from '@/components/ui/badge';
 
-
 import {
     Table,
     TableBody,
@@ -28,7 +27,7 @@ const allProjects: NavItem = {
 };
 
 const createTask: NavItem = {
-    title: 'Crate task',
+    title: 'Create task',
     href: '/projects/' + props.project.key + '/tasks/create'
 };
 
@@ -36,7 +35,7 @@ const createTask: NavItem = {
 
 <template>
 
-    <Head :title="project.key"></Head>
+    <Head :title="project.key + ' Project'"></Head>
     <SandboxLayout>
         <main class="flex flex-col max-w-[800px]">
             <div class="flex justify-between">
@@ -45,7 +44,7 @@ const createTask: NavItem = {
             </div>
             <div class="mt-[1.2em]">
                 <Badge class="uppercase">{{ project.type }}</Badge>
-                <div class="flex gap-2 mt-2">
+                <div class="flex gap-2 mt-4">
                     <div v-for="(status, index) in project.workflows" :key="status.id">
                         <span class="pr-2 uppercase">{{ status.name }}</span> <span v-if="index < project.workflows!.length - 1"> -> </span>
                     </div>

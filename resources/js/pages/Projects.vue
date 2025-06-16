@@ -23,7 +23,7 @@ const createProject: NavItem = {
 
 <template>
 
-    <Head title="SMPL board"></Head>
+    <Head title="Projects"></Head>
     <SandboxLayout>
         <main class="flex flex-col w-[800px] max-w-[800px]">
             <div class="mb-3">

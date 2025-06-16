@@ -7,9 +7,18 @@ import InputError from '@/components/InputError.vue';
 import TextLink from "@/components/TextLink.vue";
 import SandboxLayout from '@/layouts/SandboxLayout.vue';
 
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select'
 
 import { Head, useForm } from '@inertiajs/vue3';
 import { watch, ref } from 'vue';
+
+const projectTypes = ['basic', 'scrum'];
 
 const allProjects = {
     title: 'Back to all projects',
@@ -17,6 +26,7 @@ const allProjects = {
 };
 
 const form = useForm({
+    type: '',
     name: '',
     key: '',
 });
@@ -79,12 +89,25 @@ watch(() => form.name, (newProjectName) => {
                 <div class="">
                     <h1 class="dark:text-[#EDEDEC]">Project</h1>
                 </div>
-                <div class="">
-                    <p>Explore what's possible when you collaborate with your team.</p>
-                    <p>Edit project details anytime in project settings.</p>
-                    <p>Required fields are marked with an asterisk.<span aria-hidden="true" title="required" class="text-orange-600">*</span></p>
-                </div>
-                <div class="flex flex-col gap-[1.2em] pt-[.8em] pb-[1.2em]">
+                <div class="flex flex-col gap-[1.2em] pb-[1.2em]">
+                    <div class="">
+                        <p>Explore what's possible when you collaborate with your team.</p>
+                        <p>Edit project details anytime in project settings.</p>
+                        <p>Required fields are marked with an asterisk.<span aria-hidden="true" title="required" class="text-orange-600">*</span></p>
+                    </div>
+                    <div class="gap-2 grid">
+                        <Label for="project_type">Type<span aria-hidden="true" title="required" class="text-orange-600">*</span></Label>
+                        <Select id="project_type" v-model="form.type" required>
+                            <SelectTrigger class="w-[180px]">
+                                <SelectValue placeholder="Select a project type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem v-for="(type, index) in projectTypes" :key="index" :value="type" class="capitalize">
+                                    {{ type }}
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
                     <div class="gap-2 grid">
                         <Label for="project_name">Name<span aria-hidden="true" title="required" class="text-orange-600">*</span></Label>
                         <Input id="project_name" class="" type="text" required autofocus :tabindex="1" autocomplete="project_name" v-model="form.name" placeholder="Try a team name, project goal, milestone..." />
