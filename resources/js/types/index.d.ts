@@ -40,6 +40,13 @@ export interface Project {
     name: string;
     key: string;
     type: string;
+    tasks?: Task[];
+    workflows?: Workflow[];
+}
+
+export interface Workflow {
+    id: number;
+    name: string;
 }
 
 export interface Task {

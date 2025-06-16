@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Project, Task, NavItem } from "@/types";
+import { Project, NavItem } from "@/types";
 import { Head } from '@inertiajs/vue3';
 import TextLink from "@/components/TextLink.vue";
 import SandboxLayout from '@/layouts/SandboxLayout.vue';
@@ -17,8 +17,7 @@ import {
 } from '@/components/ui/table';
 
 interface Props {
-    project: Project,
-    tasks: Task[]
+    project: Project
 }
 
 const props = defineProps<Props>()
@@ -46,6 +45,11 @@ const createTask: NavItem = {
             </div>
             <div class="mt-[1.2em]">
                 <Badge class="uppercase">{{ project.type }}</Badge>
+                <div class="flex gap-2 mt-2">
+                    <div v-for="(status, index) in project.workflows" :key="status.id">
+                        <span class="pr-2 uppercase">{{ status.name }}</span> <span v-if="index < project.workflows!.length - 1"> -> </span>
+                    </div>
+                </div>
                 <h1>{{ project.key }} - {{ project.name }}</h1>
             </div>
             <Table>
@@ -63,7 +67,7 @@ const createTask: NavItem = {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow v-for="task in tasks" :key="task.key">
+                    <TableRow v-for="task in project.tasks" :key="task.key">
                         <TableCell class="font-medium">
                             {{ task.key }}
                         </TableCell>

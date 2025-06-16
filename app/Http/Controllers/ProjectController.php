@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProjectResource;
 use App\Http\Resources\TaskResource;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -53,11 +54,8 @@ class ProjectController extends Controller
      */
     public function show(String $project_key)
     {
-        $project = Project::where('key', $project_key)->first();
-
         return Inertia::render('projects/Show', [
-            'project' => $project,
-            'tasks' => TaskResource::collection($project->tasks),
+            'project' => Project::where('key', $project_key)->first()->toResource(),
         ]);
     }
 
