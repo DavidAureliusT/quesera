@@ -71,7 +71,7 @@ watch(() => form.name, (newProjectName) => {
 
 <template>
 
-    <Head title="Create board"></Head>
+    <Head title="Create Project"></Head>
     <SandboxLayout>
         <main class="flex flex-col max-w-[560px]">
             <TextLink :href="allProjects.href">{{ allProjects.title }}</TextLink>

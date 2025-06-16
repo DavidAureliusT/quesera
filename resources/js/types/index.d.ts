@@ -39,6 +39,15 @@ export interface Project {
     id: number;
     name: string;
     key: string;
+    type: string;
+}
+
+export interface Task {
+    id: number;
+    key: string;
+    summary: string;
+    point: number;
+    status: string;
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;

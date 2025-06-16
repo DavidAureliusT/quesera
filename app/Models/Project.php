@@ -16,7 +16,18 @@ class Project extends Model
         'key',
         'icon_color',
         'description',
+        'type',
     ];
+
+    public function workflows(): HasMany
+    {
+        return $this->hasMany(Workflow::class, 'project_id', 'id');
+    }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class, 'project_id', 'id');
+    }
 
     public function accesses(): HasMany
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TaskResource;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,7 +15,7 @@ class ProjectController extends Controller
     public function index()
     {
         return Inertia::render('Projects', [
-            'projects' => Project::all()->select(['id', 'name', 'key'])
+            'projects' => Project::all()->select(['id', 'name', 'key', 'type'])
         ]);
     }
 
@@ -36,23 +37,27 @@ class ProjectController extends Controller
             'key' => ['required', 'unique:projects'],
         ]);
 
-        $project = Project::create($validated);
+        $project = Project::factory()
+            ->scrum()
+            ->state($validated)
+            ->create();
 
-        return redirect(
-            route(
-                name: 'projects.show',
-                parameters: ['key' => $project->key]
-            )
+        return to_route(
+            route: 'projects.show',
+            parameters: ['project_key' => $project->key]
         );
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(String $key)
+    public function show(String $project_key)
     {
+        $project = Project::where('key', $project_key)->first();
+
         return Inertia::render('projects/Show', [
-            'project' => Project::where('key', $key)->first()
+            'project' => $project,
+            'tasks' => TaskResource::collection($project->tasks),
         ]);
     }
 

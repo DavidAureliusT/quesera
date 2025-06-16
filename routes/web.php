@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -10,7 +11,14 @@ Route::get('/', function () {
 
 Route::resource('projects', ProjectController::class)
     ->only(['index', 'create', 'store', 'show'])
-    ->parameters(['projects' => 'key']);
+    ->parameters(['projects' => 'project_key']);
+
+Route::resource('projects.tasks', TaskController::class)
+    ->only(['index', 'create', 'store', 'show'])
+    ->parameters([
+        'projects' => 'project_key',
+        'tasks' => 'task_key'
+    ]);
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');

@@ -3,6 +3,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import { type NavItem, type Project } from '@/types';
 import SandboxLayout from '@/layouts/SandboxLayout.vue';
 import TextLink from "@/components/TextLink.vue";
+import { Badge } from '@/components/ui/badge';
 
 
 interface Props {
@@ -40,6 +41,7 @@ const createProject: NavItem = {
                     <p class="flex-none w-12 text-right">{{ project.id }}</p>
                     <p class="flex-none w-12">{{ project.key }}</p>
                     <p class="flex-1">{{ project.name }}</p>
+                    <Badge class="uppercase">{{ project.type }}</Badge>
                 </div>
                 </Link>
             </div>
