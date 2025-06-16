@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')->references('id')->on('projects');
             $table->string('name');
+            $table->string('category');
             $table->timestamps();
         });
 

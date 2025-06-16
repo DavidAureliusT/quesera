@@ -43,10 +43,14 @@ const createTask: NavItem = {
                 <TextLink :href="createTask.href">{{ createTask.title }}</TextLink>
             </div>
             <div class="mt-[1.2em]">
-                <Badge class="uppercase">{{ project.type }}</Badge>
+                <Badge class="uppercase">{{ project.type }} Workflow</Badge>
                 <div class="flex gap-2 mt-4">
                     <div v-for="(status, index) in project.workflows" :key="status.id">
-                        <span class="pr-2 uppercase">{{ status.name }}</span> <span v-if="index < project.workflows!.length - 1"> -> </span>
+                        <span class="pr-2 uppercase">
+                            <Badge v-if="status.category == 'To do'" variant="outline">{{ status.name }}</Badge>
+                            <Badge v-if="status.category == 'In Progress'" variant="secondary">{{ status.name }}</Badge>
+                            <Badge v-if="status.category == 'Done'" variant="destructive">{{ status.name }}</Badge>
+                        </span> <span v-if="index < project.workflows!.length - 1"> -> </span>
                     </div>
                 </div>
                 <h1>{{ project.key }} - {{ project.name }}</h1>
@@ -74,7 +78,11 @@ const createTask: NavItem = {
                         <TableCell class="text-right">
                             {{ task.point }}
                         </TableCell>
-                        <TableCell>{{ task.status }}</TableCell>
+                        <TableCell>
+                            <Badge v-if="task.status_category == 'To do'" variant="outline">{{ task.status_name }}</Badge>
+                            <Badge v-if="task.status_category == 'In Progress'" variant="secondary">{{ task.status_name }}</Badge>
+                            <Badge v-if="task.status_category == 'Done'" variant="destructive">{{ task.status_name }}</Badge>
+                        </TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

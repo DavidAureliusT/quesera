@@ -11,6 +11,7 @@ class Workflow extends Model
     protected $fillable = [
         'name',
         'project_id',
+        'category'
     ];
 
     public function project(): BelongsTo

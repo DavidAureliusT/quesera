@@ -47,6 +47,7 @@ export interface Project {
 export interface Workflow {
     id: number;
     name: string;
+    category: string;
 }
 
 export interface Task {
@@ -54,7 +55,8 @@ export interface Task {
     key: string;
     summary: string;
     point: number;
-    status: string;
+    status_name: string;
+    status_category: string;
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;

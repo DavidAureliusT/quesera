@@ -44,17 +44,41 @@ class ProjectController extends Controller
 
         if ($validated['type'] == 'basic') {
             $project->workflows()->saveMany([
-                new Workflow(['name' => 'To do']),
-                new Workflow(['name' => 'In Progress']),
-                new Workflow(['name' => 'Done']),
+                new Workflow([
+                    'name' => 'To do',
+                    'category' => 'To do',
+                ]),
+                new Workflow([
+                    'name' => 'In Progress',
+                    'category' => 'In Progress',
+                ]),
+                new Workflow([
+                    'name' => 'Done',
+                    'category' => 'Done',
+                ]),
             ]);
         } else if ($validated['type'] == 'scrum') {
             $project->workflows()->saveMany([
-                new Workflow(['name' => 'Backlog']),
-                new Workflow(['name' => 'Sprint']),
-                new Workflow(['name' => 'In Progress']),
-                new Workflow(['name' => 'Review']),
-                new Workflow(['name' => 'Done']),
+                new Workflow([
+                    'name' => 'Backlog',
+                    'category' => 'To do'
+                ]),
+                new Workflow([
+                    'name' => 'Sprint',
+                    'category' => 'In Progress'
+                ]),
+                new Workflow([
+                    'name' => 'In Progress',
+                    'category' => 'In Progress'
+                ]),
+                new Workflow([
+                    'name' => 'Review',
+                    'category' => 'In Progress'
+                ]),
+                new Workflow([
+                    'name' => 'Done',
+                    'category' => 'Done'
+                ]),
             ]);
         }
 
