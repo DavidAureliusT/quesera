@@ -19,7 +19,7 @@ interface Props {
 
 defineProps<Props>()
 
-const openTask = ref({});
+const openTask = ref();
 
 const allProjects: NavItem = {
     title: 'Back to all projects',
@@ -61,8 +61,8 @@ function handleOpenTask(task: Task) {
                     </div>
                 </main>
             </ResizablePanel>
-            <ResizableHandle with-handle />
-            <ResizablePanel :default-size="40">
+            <ResizableHandle v-if="openTask" with-handle />
+            <ResizablePanel v-if="openTask" :default-size="30" :min-size="30" :max-size="35">
                 Task Detail
                 <pre>{{ openTask }}</pre>
             </ResizablePanel>
