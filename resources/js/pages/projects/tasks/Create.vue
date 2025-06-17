@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { Project, NavItem } from "@/types";
+import { Head, useForm } from '@inertiajs/vue3';
+import SandboxLayout from '@/layouts/SandboxLayout.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { LoaderCircle } from 'lucide-vue-next';
 import InputError from '@/components/InputError.vue';
 import TextLink from "@/components/TextLink.vue";
-import SandboxLayout from '@/layouts/SandboxLayout.vue';
+import { LoaderCircle } from 'lucide-vue-next';
 
-import { Head, useForm } from '@inertiajs/vue3';
 
 interface Props {
     project: Project
