@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
+// import { Egg } from 'lucide-vue-next';
+
+import { usePage } from '@inertiajs/vue3';
+
+const page = usePage();
+
 </script>
 
 <template>
-    <div class="flex aspect-square size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-        <AppLogoIcon class="size-5 fill-current text-white dark:text-black" />
+    <div class="flex justify-center items-center bg-sidebar-primary rounded-md size-8 aspect-square text-sidebar-primary-foreground">
+        <p class="fill-current font-bold text-[1.2em] text-white dark:text-black uppercase">{{ page.props.name[0] }}</p>
+        <!-- <Egg class="fill-current size-5 text-white dark:text-black/40" /> -->
     </div>
-    <div class="ml-1 grid flex-1 text-left text-sm">
-        <span class="mb-0.5 truncate leading-tight font-semibold">Laravel Starter Kit</span>
+    <div class="flex-1 grid ml-1 text-sm text-left">
+        <span class="mb-0.5 font-semibold truncate capitalize leading-tight">{{ page.props.name }}</span>
     </div>
 </template>

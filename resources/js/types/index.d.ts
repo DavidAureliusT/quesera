@@ -35,6 +35,15 @@ export interface User {
     updated_at: string;
 }
 
+export interface ProjectLink {
+    id: number;
+    name: string;
+    key: string;
+    type: string;
+    href: string;
+    icon: LucideIcon;
+}
+
 export interface Project {
     id: number;
     name: string;

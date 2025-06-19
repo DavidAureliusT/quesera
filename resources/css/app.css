@@ -168,6 +168,6 @@
         @apply font-bold text-[3em];
     }
     p {
-        @apply text-[.8em] leading-[1.8em] tracking-[.01em];
+        @apply leading-[1.8em] tracking-[.01em];
     }
 }
