@@ -6,6 +6,8 @@ use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::get('/day-1', fn() => Inertia::render('DayOne'));
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', fn() => Inertia::render('Compas', [
         //
