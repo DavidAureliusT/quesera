@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/day-1', fn() => Inertia::render('DayOne'));
+Route::get('/server', fn() => $_SERVER);
+Route::get('/globals', fn() => $GLOBALS);
+Route::get('/tz', fn() => "TIMEZONE");
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', fn() => Inertia::render('Compas', [

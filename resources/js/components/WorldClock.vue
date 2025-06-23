@@ -1,6 +1,5 @@
-<!-- WorldClock.vue -->
 <template>
-    <div class="border border-white rounded-full w-[10em] aspect-square">
+    <div class="border border-white rounded-full min-w-[8em] aspect-square">
         <div class="place-items-center grid w-full h-full">
             <div class="flex flex-col items-center">
                 <div class="flex gap-[.8em]">
@@ -15,7 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
 import { useWorldClock } from '@/composables/useWorldClock';
 import { Moon, Sun } from 'lucide-vue-next';
 
