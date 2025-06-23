@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { Project, ProjectLink, type NavItem } from '@/types';
-import { Link } from '@inertiajs/vue3';
+import { Project, ProjectItem, type NavItem } from '@/types';
+import { Link, usePage } from '@inertiajs/vue3';
 
 import { BookOpen, Folder, Rocket } from 'lucide-vue-next';
 
 import AppLogo from '@/components/AppLogo.vue';
 import AppShell from '@/components/AppShell.vue';
-import NavProject from '@/components/NavProject.vue';
+import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import NavFooter from '@/components/NavFooter.vue';
 
@@ -27,6 +27,9 @@ import {
     ResizablePanelGroup,
 } from '@/components/ui/resizable';
 
+interface Props {
+    project?: Project
+}
 
 const sidePeekObject = ref();
 
@@ -43,15 +46,13 @@ const footerNavItems: NavItem[] = [
     },
 ];
 
-interface Props {
-    projects: Project[]
-}
-
 const props = defineProps<Props>()
 
-const projectLinks = computed(() =>
-    props.projects.map(
-        (project: Project): ProjectLink => {
+const page = usePage();
+
+const projectNavItems = computed(() =>
+    page.props.compas.projectItems.map(
+        (project: ProjectItem): NavItem => {
             return {
                 title: project.name,
                 href: '/projects/' + project.key,
@@ -79,12 +80,7 @@ const projectLinks = computed(() =>
             </SidebarHeader>
 
             <SidebarContent>
-                <NavProject :links="projectLinks" />
-                <NavProject :links="projectLinks" />
-                <NavProject :links="projectLinks" />
-                <NavProject :links="projectLinks" />
-                <NavProject :links="projectLinks" />
-                <NavProject :links="projectLinks" />
+                <NavMain :items="projectNavItems" />
                 <slot name="navigation" />
             </SidebarContent>
 
@@ -97,7 +93,8 @@ const projectLinks = computed(() =>
         <ResizablePanelGroup direction="horizontal">
 
             <ResizablePanel>
-                <pre>{{ props.projects }}</pre>
+                <pre v-if="!props.project">{{ page.props.compas.projectItems }}</pre>
+                <pre v-else>{{ props.project }}</pre>
             </ResizablePanel>
 
             <ResizableHandle v-if="sidePeekObject" />

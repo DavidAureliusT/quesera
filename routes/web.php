@@ -2,14 +2,13 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
-use App\Http\Resources\ProjectResource;
 use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', fn() => Inertia::render('Compas', [
-        'projects' => Project::all()->select(['id', 'name', 'key', 'type'])
+        //
     ]))->name('home');
     Route::get('/dashboard', fn() => Inertia::render('Dashboard'))->name('dashboard');
     Route::resources(

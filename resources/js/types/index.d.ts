@@ -23,6 +23,9 @@ export type AppPageProps<T extends Record<string, unknown> = Record<string, unkn
     auth: Auth;
     ziggy: Config & { location: string };
     sidebarOpen: boolean;
+    compas: {
+        projectItems: ProjectItem[]
+    }
 };
 
 export interface User {
@@ -42,6 +45,12 @@ export interface ProjectLink {
     type: string;
     href: string;
     icon: LucideIcon;
+}
+
+export interface ProjectItem {
+    id: number;
+    name: string;
+    key: string;
 }
 
 export interface Project {
