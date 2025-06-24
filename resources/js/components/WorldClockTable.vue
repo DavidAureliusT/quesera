@@ -1,18 +1,16 @@
 <template>
-    <table class="table border border-gray-400 w-full border-collapse">
+    <table class="table w-full">
         <thead>
             <tr>
-                <th class="px-[1em] border border-gray-300 text-left">Country Code</th>
-                <th class="px-[1em] border border-gray-300 text-left">TZ Identifier</th>
-                <th class="px-[1em] border border-gray-300 text-right">Current Time</th>
+                <!-- <th class="px-[1em] text-left">Country Code</th> -->
+                <th class="px-[1em] text-left">TZ Identifier</th>
+                <th class="px-[1em] text-left">Date</th>
+                <th class="px-[1em] text-left">Abbr</th>
+                <th class="px-[1em] text-right">Time</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(timeZone, index) in databaseTimeZones" :key="index">
-                <td class="px-[1em] border border-gray-300">{{ timeZone['cc'] }}</td>
-                <td class="px-[1em] border border-gray-300">{{ timeZone['id_tz'] }}</td>
-                <WorldClockTableRow :time-zone="timeZone['id_tz']"></WorldClockTableRow>
-            </tr>
+            <WorldClockTableRow v-for="(timezone, index) in databaseTimezones" :key="index" :country-code="timezone['cc']" :timezone="timezone['id_tz']"></WorldClockTableRow>
         </tbody>
     </table>
 </template>
@@ -20,7 +18,9 @@
 <script setup lang="ts">
 import WorldClockTableRow from './WorldClockTableRow.vue';
 
-const databaseTimeZones = [
+const databaseTimezones = [
+    { "cc": ["UM"], "id_tz": "Pacific/Midway" },
+    { "cc": ["GL"], "id_tz": "America/Danmarkshavn" },
     { "cc": ["YE"], "id_tz": "Asia/Aden" },
     { "cc": ["KZ"], "id_tz": "Asia/Almaty" },
     { "cc": ["JO"], "id_tz": "Asia/Amman" },
