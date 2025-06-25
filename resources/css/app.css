@@ -169,9 +169,6 @@
     h1 {
         @apply font-bold text-[3em];
     }
-    caption {
-        @apply font-bold text-[1.2em] tracking-wide;
-    }
     p {
         @apply leading-[1.8em] tracking-[.01em];
     }

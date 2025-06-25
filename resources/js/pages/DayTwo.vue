@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbItem[] = [
         <div class="pt-[3em] h-screen overflow-y-scroll">
             <div class="flex flex-col items-start px-[.8em] md:px-[1em]">
                 <h1>Day Two</h1>
-                <caption>Sky & Sea</caption>
+                <p class="font-bold text-[1.2em] tracking-wide">Sky & Sea</p>
             </div>
             <div class="mt-[1.2em]">
                 <WorldClockTable></WorldClockTable>
