@@ -1,20 +1,20 @@
 <template>
     <tr :class="{
-        'bg-white text-black opacity-40 hover:opacity-100': !isAfterNoon,
-        'text-white opacity-40 hover:opacity-100': isAfterNoon
+        'bg-white text-black': !isAfterNoon,
+        'text-white': isAfterNoon
     }">
-        <td class="px-[1em]">{{ timezone }}</td>
-        <td class="px-[1em]">{{ currentTime.toLocaleDateString('EN', { dateStyle: "full" }) }}</td>
-        <td class="px-[1em]">{{ timeZoneAbbr }}</td>
-        <td class="px-[1em] text-right">
-            <p class="flex justify-between items-center font-mono">
+        <td class="px-[1em] py-[.2em]">{{ timezone }}</td>
+        <td class="px-[1em] py-[.2em] text-right">
+            <p class="flex justify-between items-center tabular-nums">
                 <span class="w-[2em]">
                     <Moon v-if="isAfterNoon" />
                     <Sun v-else />
                 </span>
-                {{ currentTime.toLocaleTimeString('EN', { timeStyle: "short" }) }}
+                {{ currentTime.toLocaleTimeString('EN', { timeStyle: "medium" }) }}
             </p>
         </td>
+        <td class="px-[1em] py-[.2em]">{{ currentTime.toLocaleDateString('EN', { dateStyle: "full" }) }}</td>
+        <td class="px-[1em] py-[.2em]">{{ timeZoneAbbr }}</td>
     </tr>
 </template>
 

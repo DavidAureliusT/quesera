@@ -1,12 +1,11 @@
 <template>
-    <table class="table w-full">
+    <table class="w-full table-fixed">
         <thead>
             <tr>
-                <!-- <th class="px-[1em] text-left">Country Code</th> -->
-                <th class="px-[1em] text-left">TZ Identifier</th>
-                <th class="px-[1em] text-left">Date</th>
-                <th class="px-[1em] text-left">Abbr</th>
-                <th class="px-[1em] text-right">Time</th>
+                <th class="px-[1em] pb-[.4em] border-white/40 border-b text-left">TZ Identifier</th>
+                <th class="px-[1em] pb-[.4em] border-white/40 border-b w-[11em] text-right">Time</th>
+                <th class="px-[1em] pb-[.4em] border-white/40 border-b w-[16em] text-left">Date</th>
+                <th class="px-[1em] pb-[.4em] border-white/40 border-b w-[8em] text-left">Abbr</th>
             </tr>
         </thead>
         <tbody>

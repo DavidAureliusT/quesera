@@ -6,7 +6,8 @@ use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/day-1', fn() => Inertia::render('DayOne'));
+Route::get('/day-1', fn() => Inertia::render('DayOne'))->name('day-1');
+Route::get('/day-2', fn() => Inertia::render('DayTwo'))->name('day-2');
 Route::get('/server', fn() => $_SERVER);
 Route::get('/globals', fn() => $GLOBALS);
 Route::get('/tz', fn() => "TIMEZONE");
