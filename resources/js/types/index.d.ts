@@ -54,9 +54,9 @@ export interface ProjectItem {
 }
 
 export interface Project {
-    id: number;
     name: string;
     key: string;
+    icon_color: string;
     type: string;
     tasks?: Task[];
     workflows?: Workflow[];
