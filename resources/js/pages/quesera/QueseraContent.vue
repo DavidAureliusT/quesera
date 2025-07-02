@@ -3,7 +3,7 @@
         <div class="flex-1 h-[calc(100vh-1.8em)] overflow-y-scroll">
             <slot />
         </div>
-        <div class="w-[16em] h-[calc(100vh-1.8em)] overflow-y-scroll">
+        <div v-if="$slots.side" class="w-[16em] h-[calc(100vh-1.8em)] overflow-y-scroll">
             <slot name="side" />
         </div>
     </div>

@@ -26,7 +26,7 @@ const page = usePage();
         <QueseraContent :project="project">
             <template #side>
                 <pre class="text-[.8em]">{{ page.props }}</pre>
-                <pre class="text-[.8em]">{{ project }}</pre>
+                <!-- <pre class="text-[.8em]">{{ project }}</pre> -->
             </template>
             <QueseraProjectContent :project="project" />
         </QueseraContent>
