@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Project } from '@/types';
 import { ref } from 'vue';
+import QueseraTaskList from './QueseraTaskList.vue';
 
 const menus = [
     "Summary",
@@ -43,7 +44,7 @@ defineProps<Props>();
         }" v-html="menu"></p>
     </div>
     <div class="p-[.8em]">
-        <h2>{{ menuActive }}</h2>
-
+        <!-- <h2>{{ menuActive }}</h2> -->
     </div>
+    <QueseraTaskList :project="project" v-if="menuActive == 'List'" />
 </template>

@@ -29,7 +29,7 @@ export type AppPageProps<T extends Record<string, unknown> = Record<string, unkn
 };
 
 export interface User {
-    id: number;
+    id: string;
     name: string;
     email: string;
     avatar?: string;
@@ -39,7 +39,7 @@ export interface User {
 }
 
 export interface ProjectLink {
-    id: number;
+    id: string;
     name: string;
     key: string;
     type: string;
@@ -48,7 +48,7 @@ export interface ProjectLink {
 }
 
 export interface ProjectItem {
-    id: number;
+    id: string;
     name: string;
     key: string;
 }
@@ -59,20 +59,21 @@ export interface Project {
     icon_color: string;
     type: string;
     tasks?: Task[];
-    workflows?: Workflow[];
+    workflows: Workflow[];
 }
 
 export interface Workflow {
-    id: number;
+    id: string;
     name: string;
     category: string;
 }
 
 export interface Task {
-    id: number;
+    id: string;
     key: string;
     summary: string;
     point: number;
+    status_id: string;
     status_name: string;
     status_category: string;
 }

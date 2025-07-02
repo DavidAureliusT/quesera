@@ -93,7 +93,7 @@ class ProjectController extends Controller
      */
     public function show(String $project_key)
     {
-        return Inertia::render('Compas', [
+        return Inertia::render('DayThree', [
             'project' => Project::where('key', $project_key)->first()->toResource(),
         ]);
     }
