@@ -1,3 +1,3 @@
 <template>
-    <small class="p-[.8em] font-black tracking-tighter">Quesera</small>
+    <small class="font-black tracking-tighter">Quesera</small>
 </template>
