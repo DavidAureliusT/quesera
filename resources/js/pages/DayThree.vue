@@ -43,7 +43,7 @@ const page = usePage();
             </template>
             <QueseraProjectContent :project="project" />
             <template #rightSide>
-                <pre class="text-[.8em]">{{ page.props.compas }}</pre>
+                <pre class="text-[.8em]">{{ project }}</pre>
             </template>
         </QueseraContent>
     </QueseraShell>
