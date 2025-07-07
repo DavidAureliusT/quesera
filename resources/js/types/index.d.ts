@@ -47,10 +47,11 @@ export interface ProjectLink {
     icon: LucideIcon;
 }
 
-export interface ProjectItem {
+export interface NavItemProject {
     id: string;
     name: string;
     key: string;
+    href: string;
 }
 
 export interface Project {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\ProjectListItemResource;
 use App\Models\Project;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
@@ -53,7 +54,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'compas' => [
-                'projectItems' => Project::all()->select(['id', 'name', 'key'])
+                'projectItems' => Project::all()->toResourceCollection(resourceClass: ProjectListItemResource::class)
             ]
         ];
     }

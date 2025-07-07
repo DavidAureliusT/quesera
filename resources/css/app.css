@@ -192,6 +192,9 @@
         @apply font-medium text-[2em] leading-[1em];
     }
     p {
-        @apply leading-[1.8em] tracking-[.01em];
+        @apply text-[.8em] leading-[1.8em] tracking-[.01em];
+    }
+    input {
+        @apply text-[.8em] leading-[.8em];
     }
 }
