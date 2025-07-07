@@ -16,9 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Projects', [
-            'projects' => Project::all()->select(['id', 'name', 'key', 'type'])
-        ]);
+        return Inertia::render('DayThree');
     }
 
     /**

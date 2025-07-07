@@ -1,3 +1,49 @@
+<template>
+    <main class="flex flex-col max-w-[560px]">
+        <TextLink :href="allProjects.href">{{ allProjects.title }}</TextLink>
+        <form @submit.prevent="submit" class="flex flex-col gap-2">
+            <div class="">
+                <h1 class="dark:text-[#EDEDEC]">Project</h1>
+            </div>
+            <div class="flex flex-col gap-[1.2em] pb-[1.2em]">
+                <div class="">
+                    <p>Explore what's possible when you collaborate with your team.</p>
+                    <p>Edit project details anytime in project settings.</p>
+                    <p>Required fields are marked with an asterisk.<span aria-hidden="true" title="required" class="text-orange-600">*</span></p>
+                </div>
+                <div class="gap-2 grid">
+                    <Label for="project_type">Type<span aria-hidden="true" title="required" class="text-orange-600">*</span></Label>
+                    <Select id="project_type" v-model="form.type" required>
+                        <SelectTrigger class="w-[180px]">
+                            <SelectValue placeholder="Select a project type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem v-for="(type, index) in projectTypes" :key="index" :value="type" class="capitalize">
+                                {{ type }}
+                            </SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+                <div class="gap-2 grid">
+                    <Label for="project_name">Name<span aria-hidden="true" title="required" class="text-orange-600">*</span></Label>
+                    <Input id="project_name" class="" type="text" required autofocus :tabindex="1" autocomplete="project_name" v-model="form.name" placeholder="Try a team name, project goal, milestone..." />
+                    <InputError :message="form.errors.name" />
+                </div>
+                <div class="gap-2 grid">
+                    <Label for="project_key">Key<span aria-hidden="true" title="required" class="text-orange-600">*</span></Label>
+                    <Input id="project_key" class="w-[100px]" type="text" required autofocus :tabindex="1" autocomplete="project_key" v-model="form.key" />
+                    <InputError :message="form.errors.key" />
+                </div>
+            </div>
+            <Button type="submit" class="flex-none" :tabindex="4" :disabled="form.processing">
+                <LoaderCircle v-if="form.processing" class="w-4 h-4 animate-spin" />
+                Create
+            </Button>
+        </form>
+    </main>
+
+</template>
+
 <script setup lang="ts">
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -5,7 +51,6 @@ import { Label } from '@/components/ui/label';
 import { LoaderCircle } from 'lucide-vue-next';
 import InputError from '@/components/InputError.vue';
 import TextLink from "@/components/TextLink.vue";
-import SandboxLayout from '@/layouts/SandboxLayout.vue';
 
 import {
     Select,
@@ -15,7 +60,7 @@ import {
     SelectValue,
 } from '@/components/ui/select'
 
-import { Head, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 import { watch, ref } from 'vue';
 
 const projectTypes = ['basic', 'scrum'];
@@ -78,53 +123,3 @@ watch(() => form.name, (newProjectName) => {
 });
 
 </script>
-
-<template>
-
-    <Head title="Create Project"></Head>
-    <SandboxLayout>
-        <main class="flex flex-col max-w-[560px]">
-            <TextLink :href="allProjects.href">{{ allProjects.title }}</TextLink>
-            <form @submit.prevent="submit" class="flex flex-col gap-2">
-                <div class="">
-                    <h1 class="dark:text-[#EDEDEC]">Project</h1>
-                </div>
-                <div class="flex flex-col gap-[1.2em] pb-[1.2em]">
-                    <div class="">
-                        <p>Explore what's possible when you collaborate with your team.</p>
-                        <p>Edit project details anytime in project settings.</p>
-                        <p>Required fields are marked with an asterisk.<span aria-hidden="true" title="required" class="text-orange-600">*</span></p>
-                    </div>
-                    <div class="gap-2 grid">
-                        <Label for="project_type">Type<span aria-hidden="true" title="required" class="text-orange-600">*</span></Label>
-                        <Select id="project_type" v-model="form.type" required>
-                            <SelectTrigger class="w-[180px]">
-                                <SelectValue placeholder="Select a project type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem v-for="(type, index) in projectTypes" :key="index" :value="type" class="capitalize">
-                                    {{ type }}
-                                </SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
-                    <div class="gap-2 grid">
-                        <Label for="project_name">Name<span aria-hidden="true" title="required" class="text-orange-600">*</span></Label>
-                        <Input id="project_name" class="" type="text" required autofocus :tabindex="1" autocomplete="project_name" v-model="form.name" placeholder="Try a team name, project goal, milestone..." />
-                        <InputError :message="form.errors.name" />
-                    </div>
-                    <div class="gap-2 grid">
-                        <Label for="project_key">Key<span aria-hidden="true" title="required" class="text-orange-600">*</span></Label>
-                        <Input id="project_key" class="w-[100px]" type="text" required autofocus :tabindex="1" autocomplete="project_key" v-model="form.key" />
-                        <InputError :message="form.errors.key" />
-                    </div>
-                </div>
-                <Button type="submit" class="flex-none" :tabindex="4" :disabled="form.processing">
-                    <LoaderCircle v-if="form.processing" class="w-4 h-4 animate-spin" />
-                    Create
-                </Button>
-            </form>
-        </main>
-    </SandboxLayout>
-
-</template>
