@@ -10,7 +10,8 @@ const menus = [
     "Calendar",
     "List",
     "Goals",
-    "Development"
+    "Development",
+    "Settings"
 ];
 
 const menuActive = ref('List');

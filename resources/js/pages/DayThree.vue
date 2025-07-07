@@ -59,7 +59,7 @@ const page = usePage();
                 </div>
             </div>
             <template #rightSide>
-                <pre class="text-[.8em]">{{ project }}</pre>
+                <pre class="text-[.8em]">{{ page }}</pre>
             </template>
         </QueseraContent>
     </QueseraShell>
