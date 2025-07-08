@@ -1,15 +1,15 @@
 <template>
-    <div class="table-row hover:bg-white/10 divide-x">
-        <div class="table-cell px-[.8em] border-b h-[1.8em] align-middle">
+    <div class="flex flex-row hover:bg-white/10 divide-x">
+        <div class="px-[.8em] border-b w-[8em] h-[1.8em] align-middle">
             <p>{{ task.key }}</p>
         </div>
-        <div class="table-cell px-[.8em] border-b h-[1.8em] align-middle">
+        <div class="flex-1 px-[.8em] border-b h-[1.8em] align-middle">
             <form @submit.prevent="blurActiveElement">
                 <input type="text" v-model="taskForm.summary" @blur="submit" class="focus:outline-0 w-full">
                 <input type="submit" hidden />
             </form>
         </div>
-        <div class="table-cell px-[.8em] border-b h-[1.8em] align-middle">
+        <div class="px-[.8em] border-b w-[4em] h-[1.8em] align-middle">
             <form @submit.prevent="blurActiveElement">
                 <input type="number" v-model="taskForm.point" @blur="submit" min="1" max="5" class="focus:outline-0 w-full focus:text-left text-right">
                 <input type="submit" hidden />
@@ -17,12 +17,12 @@
         </div>
         <DropdownMenu>
             <DropdownMenuTrigger as-child>
-                <div class="table-cell px-[.8em] border-b h-[2em] align-middle">
-                    <div :class="{
+                <div class="place-items-center grid px-[.8em] border-b w-[10em] h-[1.8em]">
+                    <div class="px-[.4em] py-[.3em] rounded w-fit font-bold text-[.7em] uppercase leading-[1em]" :class="{
                         'bg-white text-black': task.status_category == 'To do',
                         'bg-blue-300 text-black': task.status_category == 'In Progress',
                         'bg-green-300 text-black': task.status_category == 'Done',
-                    }" class="px-[.4em] py-[.3em] rounded w-fit font-bold text-[.8em] uppercase leading-[1em]">{{ task.status_name }}</div>
+                    }">{{ task.status_name }}</div>
                 </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent class="w-48">

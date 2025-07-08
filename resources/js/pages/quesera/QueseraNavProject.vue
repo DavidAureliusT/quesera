@@ -9,15 +9,15 @@
             </template>
         </QueseraFormCreateProject>
     </div>
-    <QueseraProjectListItem v-for="(item, index) in page.props.compas.projectItems" :key="index" :item="item" />
+    <QueseraNavItemProject v-for="(item, index) in page.props.compas.projectItems" :key="index" :item="item" />
 
 </template>
 
 <script setup lang="ts">
-import { Plus } from 'lucide-vue-next';
 import { usePage } from "@inertiajs/vue3";
-import QueseraFormCreateProject from '@/pages/quesera/QueseraFormCreateProject.vue';
-import QueseraProjectListItem from '@/pages/quesera/QueseraProjectListItem.vue';
+import { Plus } from 'lucide-vue-next';
+import QueseraFormCreateProject from './QueseraFormCreateProject.vue';
+import QueseraNavItemProject from './QueseraNavItemProject.vue';
 
 const page = usePage();
 

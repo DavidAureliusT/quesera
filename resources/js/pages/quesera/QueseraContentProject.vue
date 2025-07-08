@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Project } from '@/types';
 import { ref } from 'vue';
-import QueseraTaskList from './QueseraTaskList.vue';
+import { Project } from '@/types';
 import { useForm } from '@inertiajs/vue3';
+import QueseraListTask from './QueseraListTask.vue';
 import { useToast } from '@/components/ui/toast/use-toast'
 
 const { toast } = useToast()
@@ -80,5 +80,5 @@ const submit = () => {
     <div class="p-[.8em]">
         <!-- <h2>{{ menuActive }}</h2> -->
     </div>
-    <QueseraTaskList :project="project" v-if="menuActive == 'List'" />
+    <QueseraListTask :project="project" v-if="menuActive == 'List'" />
 </template>

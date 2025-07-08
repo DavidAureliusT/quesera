@@ -1,5 +1,5 @@
 <template>
-    <Link :key="item.id" class="flex flex-row hover:bg-white/20 px-[.8em] py-[.2em]" :class="classes" :href="item.href">
+    <Link :key="item.id" :href="item.href" class="flex flex-row hover:bg-white/20 px-[.8em] py-[.2em]" :class="classes">
     <div class="w-[3em]">
         <p class="opacity-50 font-mono text-[.8em]">{{ item.key }}</p>
     </div>

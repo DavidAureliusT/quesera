@@ -1,14 +1,14 @@
 <template>
-    <div class="table-row hover:bg-white/10 divide-x">
-        <div class="table-cell px-[.8em] border-b h-[1.8em] align-middle"></div>
-        <div class="table-cell px-[.8em] border-b h-[1.8em] align-middle">
+    <div class="flex flex-row hover:bg-white/10">
+        <div class="flex-none px-[.8em] border-t w-[8em] h-[1.8em] align-middle"></div>
+        <div class="flex-1 px-[.8em] border-t h-[1.8em] align-middle">
             <form @submit.prevent="blurActiveElement">
-                <input type="text" class="focus:outline-0 w-full placeholder:text-[.8em]" placeholder="What's need to be done?" v-model="newTaskForm.summary" @blur="submit">
+                <input type="text" placeholder="What's need to be done?" v-model="newTaskForm.summary" @blur="submit" class="w-full placeholder:text-[.8em]">
                 <input type="submit" hidden />
             </form>
         </div>
-        <div class="table-cell px-[.8em] border-b h-[1.8em] align-middle"></div>
-        <div class="table-cell px-[.8em] border-b h-[1.8em] align-middle"></div>
+        <div class="px-[.8em] border-t w-[4em] h-[1.8em] align-middle"></div>
+        <div class="px-[.8em] border-t w-[10em] h-[1.8em] align-middle"></div>
     </div>
 </template>
 

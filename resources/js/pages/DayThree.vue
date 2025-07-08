@@ -5,9 +5,9 @@ import Toaster from '@/components/ui/toast/Toaster.vue'
 import QueseraTopBar from './quesera/QueseraTopBar.vue';
 import QueseraContent from './quesera/QueseraContent.vue';
 import QueseraShell from './quesera/QueseraShell.vue';
-import QueseraProjectContent from './projects/QueseraProjectContent.vue';
+import QueseraContentProject from './quesera/QueseraContentProject.vue';
+import QueseraNavProject from './quesera/QueseraNavProject.vue';
 import { Bean } from 'lucide-vue-next';
-import QueseraProjectList from './quesera/QueseraProjectList.vue';
 
 
 interface Props {
@@ -29,9 +29,9 @@ const page = usePage();
 
         <QueseraContent :project="project">
             <template #leftSide>
-                <QueseraProjectList />
+                <QueseraNavProject />
             </template>
-            <QueseraProjectContent v-if="project" :project="project" />
+            <QueseraContentProject v-if="project" :project="project" />
             <div v-else class="place-items-center grid h-[calc(100vh-1.8em)]">
                 <div class="text-[.8em]">
                     <Bean :size="253" class="opacity-10 blur-xs" />
