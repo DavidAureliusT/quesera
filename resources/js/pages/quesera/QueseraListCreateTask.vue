@@ -7,8 +7,8 @@
                 <input type="submit" hidden />
             </form>
         </div>
-        <div class="px-[.8em] border-t w-[4em] h-[1.8em] align-middle"></div>
-        <div class="px-[.8em] border-t w-[10em] h-[1.8em] align-middle"></div>
+        <div class="px-[.8em] border-t w-[6em] h-[1.8em] align-middle"></div>
+        <div class="px-[.8em] border-t w-[8em] h-[1.8em] align-middle"></div>
     </div>
 </template>
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Head, usePage } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
+// import { Head, usePage } from '@inertiajs/vue3';
 import { Project } from '@/types';
 import Toaster from '@/components/ui/toast/Toaster.vue'
 import QueseraTopBar from './quesera/QueseraTopBar.vue';
@@ -16,7 +17,7 @@ interface Props {
 
 defineProps<Props>();
 
-const page = usePage();
+// const page = usePage();
 
 </script>
 
@@ -37,10 +38,10 @@ const page = usePage();
                     <Bean :size="253" class="opacity-10 blur-xs" />
                 </div>
             </div>
-            <template #rightSide>
+            <!-- <template #rightSide>
                 <pre class="text-[.8em]">{{ page.url }}</pre>
                 <pre class="text-[.8em]">{{ page.props.compas.projectItems }}</pre>
-            </template>
+            </template> -->
         </QueseraContent>
     </QueseraShell>
 </template>

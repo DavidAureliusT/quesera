@@ -8,14 +8,14 @@ import { useToast } from '@/components/ui/toast/use-toast'
 const { toast } = useToast()
 
 const menus = [
-    "Summary",
-    "Timeline",
-    "Board",
-    "Calendar",
+    // "Summary",
+    // "Timeline",
+    // "Board",
+    // "Calendar",
     "List",
-    "Goals",
-    "Development",
-    "Settings"
+    // "Goals",
+    // "Development",
+    // "Settings"
 ];
 
 const menuActive = ref('List');
@@ -77,8 +77,8 @@ const submit = () => {
             'opacity-100': menuActive == menu
         }" v-html="menu"></p>
     </div>
-    <div class="p-[.8em]">
-        <!-- <h2>{{ menuActive }}</h2> -->
-    </div>
+    <!-- <div class="p-[.8em]">
+        <h2>{{ menuActive }}</h2>
+    </div> -->
     <QueseraListTask :project="project" v-if="menuActive == 'List'" />
 </template>

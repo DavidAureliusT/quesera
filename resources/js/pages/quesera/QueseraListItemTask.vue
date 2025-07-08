@@ -9,20 +9,18 @@
                 <input type="submit" hidden />
             </form>
         </div>
-        <div class="px-[.8em] border-b w-[4em] h-[1.8em] align-middle">
+        <div class="px-[.8em] border-b w-[6em] h-[1.8em] text-center align-middle">
             <form @submit.prevent="blurActiveElement">
-                <input type="number" v-model="taskForm.point" @blur="submit" min="1" max="5" class="focus:outline-0 w-full focus:text-left text-right">
+                <input type="number" v-model="taskForm.point" @blur="submit" min="1" max="5" class="focus:outline-0 w-full focus:text-left">
                 <input type="submit" hidden />
             </form>
         </div>
         <DropdownMenu>
             <DropdownMenuTrigger as-child>
-                <div class="place-items-center grid px-[.8em] border-b w-[10em] h-[1.8em]">
-                    <div class="px-[.4em] py-[.3em] rounded w-fit font-bold text-[.7em] uppercase leading-[1em]" :class="{
-                        'bg-white text-black': task.status_category == 'To do',
-                        'bg-blue-300 text-black': task.status_category == 'In Progress',
-                        'bg-green-300 text-black': task.status_category == 'Done',
-                    }">{{ task.status_name }}</div>
+                <div class="flex flex-row items-center px-[.8em] border-b w-[8em] h-[1.8em]">
+                    <div v-if="task.status_category == 'To do'" class="bg-white px-[.4em] py-[.3em] rounded w-fit font-bold text-[.7em] text-black uppercase leading-[1em]">{{ task.status_name }}</div>
+                    <div v-if="task.status_category == 'In Progress'" class="bg-blue-300 px-[.4em] py-[.3em] rounded w-fit font-bold text-[.7em] text-black uppercase leading-[1em]">{{ task.status_name }}</div>
+                    <div v-if="task.status_category == 'Done'" class="bg-green-300 px-[.4em] py-[.3em] rounded w-fit font-bold text-[.7em] text-black uppercase leading-[1em]">{{ task.status_name }}</div>
                 </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent class="w-48">
