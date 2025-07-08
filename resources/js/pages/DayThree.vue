@@ -6,7 +6,7 @@ import QueseraTopBar from './quesera/QueseraTopBar.vue';
 import QueseraContent from './quesera/QueseraContent.vue';
 import QueseraShell from './quesera/QueseraShell.vue';
 import QueseraProjectContent from './projects/QueseraProjectContent.vue';
-import { Rocket } from 'lucide-vue-next';
+import { Bean } from 'lucide-vue-next';
 import QueseraProjectList from './quesera/QueseraProjectList.vue';
 
 
@@ -34,7 +34,7 @@ const page = usePage();
             <QueseraProjectContent v-if="project" :project="project" />
             <div v-else class="place-items-center grid h-[calc(100vh-1.8em)]">
                 <div class="text-[.8em]">
-                    <Rocket :size="253" class="opacity-10" />
+                    <Bean :size="253" class="opacity-10 blur-xs" />
                 </div>
             </div>
             <template #rightSide>

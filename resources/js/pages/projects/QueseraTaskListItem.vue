@@ -5,13 +5,13 @@
         </div>
         <div class="table-cell px-[.8em] border-b h-[1.8em] align-middle">
             <form @submit.prevent="blurActiveElement">
-                <input type="text" v-model="taskForm.summary" class="focus:outline-0 w-full" @blur="submit">
+                <input type="text" v-model="taskForm.summary" @blur="submit" class="focus:outline-0 w-full">
                 <input type="submit" hidden />
             </form>
         </div>
         <div class="table-cell px-[.8em] border-b h-[1.8em] align-middle">
             <form @submit.prevent="blurActiveElement">
-                <input type="number" v-model="taskForm.point" min="1" max="5" class="focus:outline-0 w-full focus:text-left text-right" @blur="submit">
+                <input type="number" v-model="taskForm.point" @blur="submit" min="1" max="5" class="focus:outline-0 w-full focus:text-left text-right">
                 <input type="submit" hidden />
             </form>
         </div>

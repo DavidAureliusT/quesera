@@ -107,9 +107,13 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, String $project_key)
     {
-        //
+        Project::where('key', $project_key)->update($request->validate([
+            'name' => ['required'],
+        ]));
+
+        return redirect()->back();
     }
 
     /**
