@@ -17,38 +17,57 @@ const filters = reactive({
         key: 'default',
         summary: 'default',
         point: 'default',
-        status: 'default',
+        status_id: 'default',
     }
 })
 
-const filteredTasks: Reactive<{ data: Task[] }> = reactive({ data: props.project.tasks! })
+const filteredTasks: Reactive<{ data: Task[] }> = reactive({ data: [] })
 
 watchEffect(() => {
-    filteredTasks.data = props.project.tasks!
+    filteredTasks.data = [...(props.project.tasks || [])]
         .sort((a: Task, b: Task) => {
-            const keyA = a.key.split('-')[1];
-            const keyB = b.key.split('-')[1];
-            if (filters.sorting.key == 'ascending' || filters.sorting.key == 'default') {
-                return parseInt(keyA) < parseInt(keyB) ? -1 : 1;
-            } else {
-                return parseInt(keyA) > parseInt(keyB) ? -1 : 1;
+            // Sort by key
+            if (filters.sorting.key !== 'default') {
+                const keyA = parseInt(a.key.split('-')[1]);
+                const keyB = parseInt(b.key.split('-')[1]);
+                if (keyA !== keyB) {
+                    return filters.sorting.key === 'ascending' ? keyA - keyB : keyB - keyA;
+                }
             }
+
+            // Sort by summary (alphabetically)
+            if (filters.sorting.summary !== 'default') {
+                const comparison = a.summary.localeCompare(b.summary);
+                if (comparison !== 0) {
+                    return filters.sorting.summary === 'ascending' ? comparison : -comparison;
+                }
+            }
+
+            // Sort by point
+            if (filters.sorting.point !== 'default') {
+                if (a.point !== b.point) {
+                    return filters.sorting.point === 'ascending' ? a.point - b.point : b.point - a.point;
+                }
+            }
+
+            // Sort by status_id
+            if (filters.sorting.status_id !== 'default') {
+                const statusA = parseInt(a.status_id);
+                const statusB = parseInt(b.status_id);
+                if (statusA !== statusB) {
+                    return filters.sorting.status_id === 'ascending' ? statusA - statusB : statusB - statusA;
+                }
+            }
+
+            return 0; // Keep original order if equal or default
         })
-        .sort((a: Task, b: Task) => {
-            const pointA = a.point;
-            const pointB = b.point;
-            if (filters.sorting.point == 'ascending' || filters.sorting.point == 'default') {
-                return pointA < pointB ? -1 : 1;
-            } else {
-                return pointA > pointB ? -1 : 1;
-            }
-        });
 })
+
 function handleUpdateSorting(column: string, order: string) {
     if (column == 'key') filters.sorting.key = order;
     if (column == 'summary') filters.sorting.summary = order;
     if (column == 'point') filters.sorting.point = order;
-    if (column == 'status') filters.sorting.key = order;
+    if (column == 'status_id') filters.sorting.status_id = order;
 }
 
 </script>
@@ -57,8 +76,6 @@ function handleUpdateSorting(column: string, order: string) {
     <div class="m-[1em] border rounded-lg overflow-clip">
         <QueseraListHeaderTask :sorting="filters.sorting" @update-filter="handleUpdateSorting" />
         <div class="border-t h-[calc(100vh-18em)] overflow-y-auto">
-            <!-- <pre>{{ filters }}</pre>
-            <pre>{{filteredTasks.data.map((v) => v.key)}}</pre> -->
             <QueseraListItemTask v-for="task in filteredTasks.data" :task="task" :workflows="project.workflows" :key="task.key" />
         </div>
         <QueseraListCreateTask :project_key="project.key" />

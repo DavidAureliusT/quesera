@@ -20,9 +20,9 @@
         </div>
         <div class="flex flex-none justify-between items-center px-[.8em] border-b w-[8em] h-[1.8em]">
             <p class="text-white/50">Status</p>
-            <ChevronsUpDown @click="$emit('updateFilter', 'status', 'ascending')" v-if="sorting.status == 'default'" :size="16" class="opacity-50 hover:opacity-100" />
-            <ChevronUp @click="$emit('updateFilter', 'status', 'descending')" v-if="sorting.status == 'ascending'" :size="16" class="opacity-50 hover:opacity-100" />
-            <ChevronDown @click="$emit('updateFilter', 'status', 'default')" v-if="sorting.status == 'descending'" :size="16" class="opacity-50 hover:opacity-100" />
+            <ChevronsUpDown @click="$emit('updateFilter', 'status_id', 'ascending')" v-if="sorting.status_id == 'default'" :size="16" class="opacity-50 hover:opacity-100" />
+            <ChevronUp @click="$emit('updateFilter', 'status_id', 'descending')" v-if="sorting.status_id == 'ascending'" :size="16" class="opacity-50 hover:opacity-100" />
+            <ChevronDown @click="$emit('updateFilter', 'status_id', 'default')" v-if="sorting.status_id == 'descending'" :size="16" class="opacity-50 hover:opacity-100" />
         </div>
     </div>
 </template>
@@ -35,7 +35,7 @@ interface Props {
         key: string,
         summary: string,
         point: string,
-        status: string,
+        status_id: string,
     }
 }
 
