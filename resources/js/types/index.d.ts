@@ -80,3 +80,15 @@ export interface Task {
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+export interface QueseraKeyboardEvent {
+    isComposing: boolean,
+    code: string,
+    key: string,
+    location: number,
+    altKey: boolean,
+    ctrlKey: boolean,
+    metaKey: boolean,
+    shiftKey: boolean,
+    repeat: boolean
+}

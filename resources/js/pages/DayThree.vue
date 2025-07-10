@@ -1,26 +1,3 @@
-<script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
-// import { Head, usePage } from '@inertiajs/vue3';
-import { Project } from '@/types';
-import Toaster from '@/components/ui/toast/Toaster.vue'
-import QueseraTopBar from './quesera/QueseraTopBar.vue';
-import QueseraContent from './quesera/QueseraContent.vue';
-import QueseraShell from './quesera/QueseraShell.vue';
-import QueseraContentProject from './quesera/QueseraContentProject.vue';
-import QueseraNavProject from './quesera/QueseraNavProject.vue';
-import { Bean } from 'lucide-vue-next';
-
-
-interface Props {
-    project?: Project
-}
-
-defineProps<Props>();
-
-// const page = usePage();
-
-</script>
-
 <template>
     <Toaster />
 
@@ -38,10 +15,37 @@ defineProps<Props>();
                     <Bean :size="253" class="opacity-10 blur-xs" />
                 </div>
             </div>
-            <!-- <template #rightSide>
-                <pre class="text-[.8em]">{{ page.url }}</pre>
-                <pre class="text-[.8em]">{{ page.props.compas.projectItems }}</pre>
-            </template> -->
+            <template #rightSide>
+                <QueseraEventFocus />
+
+                <!-- <pre class="text-[.8em]">{{ event }}</pre> -->
+                <!-- <pre class="text-[.8em]">{{ page.url }}</pre> -->
+                <!-- <pre class="text-[.8em]">{{ page.props.compas.projectItems }}</pre> -->
+            </template>
         </QueseraContent>
     </QueseraShell>
 </template>
+
+<script setup lang="ts">
+import { Head } from '@inertiajs/vue3';
+// import { Head, usePage } from '@inertiajs/vue3';
+import { Project } from '@/types';
+import Toaster from '@/components/ui/toast/Toaster.vue'
+import QueseraTopBar from './quesera/QueseraTopBar.vue';
+import QueseraContent from './quesera/QueseraContent.vue';
+import QueseraShell from './quesera/QueseraShell.vue';
+import QueseraContentProject from './quesera/QueseraContentProject.vue';
+import QueseraNavProject from './quesera/QueseraNavProject.vue';
+import { Bean } from 'lucide-vue-next';
+import QueseraEventFocus from './quesera/QueseraEventFocus.vue';
+
+
+interface Props {
+    project?: Project
+}
+
+defineProps<Props>();
+
+// const page = usePage();
+
+</script>
