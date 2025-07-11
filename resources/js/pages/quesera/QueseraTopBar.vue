@@ -16,15 +16,16 @@
             <div class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
                 <UserCircle :size="16" />
             </div>
-            <div class="bg-white/10 hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
-                <PanelRight :size="16" />
+            <div @click="toggleRightPanel" class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
+                <PanelRight :size="16" :class="{ 'text-orange-500': !!isOpenRightPanel }" />
             </div>
             <div class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
                 <PanelBottom :size="16" />
             </div>
-            <div class="bg-white/10 hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
-                <PanelLeft :size="16" />
+            <div @click="toggleLeftPanel" class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
+                <PanelLeft :size="16" :class="{ 'text-orange-500': !!isOpenLeftPanel }" />
             </div>
+            <!-- {{ isOpenLeftPanel == true }} -->
         </TopBarSideGroup>
     </header>
 </template>
@@ -33,11 +34,18 @@
 import { Link } from '@inertiajs/vue3';
 
 import { PanelLeft, PanelBottom, PanelRight, UserCircle, Settings } from 'lucide-vue-next';
+
 import QueseraLogoSmall from './QueseraLogoSmall.vue';
 import TopBarSideGroup from './QueseraTopBarSideGroup.vue';
 import TopBarCenterGroup from './QueseraTopBarCenterGroup.vue';
 import TopBarClock from './QueseraTopBarClock.vue';
+import { useLeftPanel } from '@/composables/useLeftPanel';
+import { useRightPanel } from '@/composables/useRightPanel';
 
 const timezoneCurrent = "Asia/Jakarta";
+
+const { isOpenLeftPanel, toggleLeftPanel } = useLeftPanel();
+const { isOpenRightPanel, toggleRightPanel } = useRightPanel();
+
 
 </script>

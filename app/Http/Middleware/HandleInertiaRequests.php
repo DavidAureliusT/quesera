@@ -52,7 +52,8 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'isOpenLeftPanel' => ! $request->hasCookie('isOpenLeftPanel') || $request->cookie('isOpenLeftPanel') === 'true',
+            'isOpenRightPanel' => ! $request->hasCookie('isOpenRightPanel') || $request->cookie('isOpenRightPanel') === 'true',
             'compas' => [
                 'projectItems' => Project::all()->toResourceCollection(resourceClass: ProjectListItemResource::class)
             ]

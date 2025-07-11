@@ -1,26 +1,39 @@
 <template>
     <div class="flex flex-col">
-        <div>
-            <p class="p-[.8em] font-bold text-[.6em] text-white/50 uppercase">Keyboard</p>
+        <div class="h-0">
+            <p class="p-[.8em] font-bold text-[.6em] text-white/50 uppercase">Keyboard ({{ keyTypeHistory.length }}) {{ keyTypeHistory.slice(-4) }}</p>
             <div class="">
-                <input id="shortcut" type="text" @keydown="keyboardListenerHandle" :autofocus="true" placeholder="Type anything" class="px-[.8em] py-[.4em] border-b w-full">
+                <input id="shortcut" type="text" v-model="keyTypeHistory" @keydown="handleKeyPress" @keyup="handleKeyUp" :autofocus="true" placeholder="Type anything" class="px-[.8em] py-[.4em] border-b w-full">
             </div>
         </div>
         <div class="bg-black pb-[.8em] border-b">
             <p class="p-[.8em] font-bold text-[.6em] text-white/50 uppercase">Focus</p>
             <div class="mb-[.8em] pb-[.8em] border-b">
+                <pre class="px-[.8em] text-[.8em]">
+                    <table class="table border w-full table-fixed">
+                        <tr>
+                            <td class="px-[.2em] border">keyTypeHistory</td>
+                            <td class="px-[.2em] border">{{ keyTypeHistory }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-[.2em] border">isFocused</td>
+                            <td class="px-[.2em] border">{{ isFocused }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-[.2em] border">focusId</td>
+                            <td class="px-[.2em] border">{{ focusId }}</td>
+                        </tr>
+                    </table>
+                </pre>
                 <pre class="px-[.8em] text-[.8em]">{{ !isFocused ? 'No Focus' : '' }}</pre>
                 <pre class="px-[.8em] text-[.8em]">{{ isFocused && focusId == '' ? 'Focus to other input' : '' }}</pre>
                 <pre class="px-[.8em] text-[.8em]">{{ focusId == 'shortcut' ? 'Focus to shortcut' : '' }}</pre>
             </div>
-            <pre class="px-[.8em] text-[.8em]">isFocused: {{ isFocused }}</pre>
-            <pre class="px-[.8em] text-[.8em]">focusId: {{ focusId }}</pre>
         </div>
         <div class="bg-black pb-[.8em] border-b">
             <p class="p-[.8em] font-bold text-[.6em] text-white/50 uppercase">Event Dump</p>
             <pre class="px-[.8em] text-[.8em]">{{ eventKey }}</pre>
         </div>
-
     </div>
 </template>
 
@@ -29,12 +42,21 @@ import {
     reactive,
     Reactive,
     ref,
+    Ref,
     onMounted,
     onUnmounted,
-    onUpdated
+    onUpdated,
 } from "vue";
 
 import { QueseraKeyboardEvent } from "@/types";
+import { useLeftPanel } from "@/composables/useLeftPanel";
+import { useRightPanel } from "@/composables/useRightPanel";
+
+const hotKeyActions = [
+    { key: '[', action: 'toggleLeftPanel' },
+    { key: ']', action: 'toggleRightPanel' },
+    { key: '\\', action: 'toggleBottomPanel' },
+]
 
 const eventKey: Reactive<QueseraKeyboardEvent> = reactive({
     isComposing: false,
@@ -60,8 +82,9 @@ function keyboardListenerHandle(event: KeyboardEvent) {
     eventKey.repeat = event.repeat;
 }
 
-const isFocused = ref(false)
-const focusId = ref('')
+const isFocused: Ref<boolean> = ref(false);
+const focusId: Ref<string> = ref('');
+const keyTypeHistory: Ref<string> = ref('');
 
 function checkInputFocus() {
     const el = document.activeElement
@@ -79,7 +102,6 @@ onMounted(() => {
     console.log("onMounted()")
     window.addEventListener('focusin', checkInputFocus);
     window.addEventListener('focusout', checkInputFocus);
-    // focusInputById('shortcut');
 });
 
 onUnmounted(() => {
@@ -90,16 +112,42 @@ onUnmounted(() => {
 
 onUpdated(() => {
     if (!isFocused.value) reFocusToShortcut()
+
+    if (keyTypeHistory.value.length == 5) {
+        keyTypeHistory.value = keyTypeHistory.value.slice(-4);
+    }
 });
 
 function reFocusToShortcut() {
-    const interval = setInterval(function () {
+    const timeout = setTimeout(function () {
         if (!isFocused.value) {
             focusInputById('shortcut');
         }
-        clearInterval(interval)
+        clearTimeout(timeout)
     }, (1 * 1000));
     console.log("reFocusToShortcut()")
+}
+
+const { toggleLeftPanel } = useLeftPanel();
+const { toggleRightPanel } = useRightPanel();
+
+function handleKeyPress(event: KeyboardEvent) {
+    keyboardListenerHandle(event);
+    hotKeyActions.find((hotkey) => {
+        if (hotkey.key == event.key) {
+            console.log('hot key action: ' + hotkey.action);
+            if (hotkey.action == 'toggleLeftPanel') toggleLeftPanel();
+            if (hotkey.action == 'toggleRightPanel') toggleRightPanel();
+            return true;
+        }
+    });
+}
+
+function handleKeyUp() {
+    const timeout = setTimeout(() => {
+        keyTypeHistory.value = ''
+        clearTimeout(timeout);
+    }, 1 * 1000);
 }
 
 </script>

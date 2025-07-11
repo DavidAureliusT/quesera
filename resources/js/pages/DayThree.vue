@@ -4,41 +4,45 @@
     <Head title="Projects" />
     <QueseraShell>
         <QueseraTopBar />
-
-        <QueseraContent :project="project">
-            <template #leftSide>
+        <QueseraContent>
+            <template v-if="!!isOpenLeftPanel" #leftSide>
                 <QueseraNavProject />
             </template>
-            <QueseraContentProject v-if="project" :project="project" />
-            <div v-else class="place-items-center grid h-[calc(100vh-1.8em)]">
-                <div class="text-[.8em]">
-                    <Bean :size="253" class="opacity-10 blur-xs" />
-                </div>
-            </div>
-            <template #rightSide>
-                <QueseraEventFocus />
-
-                <!-- <pre class="text-[.8em]">{{ event }}</pre> -->
-                <!-- <pre class="text-[.8em]">{{ page.url }}</pre> -->
-                <!-- <pre class="text-[.8em]">{{ page.props.compas.projectItems }}</pre> -->
+            <template #center v-if="project">
+                <QueseraContentProject :project="project" />
+            </template>
+            <template v-if="!!isOpenRightPanel" #rightSide>
+                <!-- <QueseraEventFocus /> -->
             </template>
         </QueseraContent>
+        <div class="flex-1 bg-black border-t">
+            <div class="flex">
+                <div class="w-[16em]"></div>
+                <div class="flex-1 text-center">
+                    <QueseraBottomBarShortcut />
+                </div>
+                <div class="w-[16em]">
+                </div>
+            </div>
+        </div>
     </QueseraShell>
 </template>
 
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
-// import { Head, usePage } from '@inertiajs/vue3';
 import { Project } from '@/types';
+
 import Toaster from '@/components/ui/toast/Toaster.vue'
+import QueseraShell from './quesera/QueseraShell.vue';
 import QueseraTopBar from './quesera/QueseraTopBar.vue';
 import QueseraContent from './quesera/QueseraContent.vue';
-import QueseraShell from './quesera/QueseraShell.vue';
 import QueseraContentProject from './quesera/QueseraContentProject.vue';
 import QueseraNavProject from './quesera/QueseraNavProject.vue';
-import { Bean } from 'lucide-vue-next';
-import QueseraEventFocus from './quesera/QueseraEventFocus.vue';
+// import QueseraEventFocus from './quesera/QueseraEventFocus.vue';
 
+import { useLeftPanel } from '@/composables/useLeftPanel';
+import { useRightPanel } from '@/composables/useRightPanel';
+import QueseraBottomBarShortcut from './quesera/QueseraBottomBarShortcut.vue';
 
 interface Props {
     project?: Project
@@ -46,6 +50,8 @@ interface Props {
 
 defineProps<Props>();
 
-// const page = usePage();
+const { isOpenLeftPanel } = useLeftPanel();
+const { isOpenRightPanel } = useRightPanel();
+
 
 </script>
