@@ -27,19 +27,19 @@
                 <DropdownMenuRadioGroup v-model="taskForm.status_id" v-on:vue:updated="submit">
                     <DropdownMenuLabel>To do</DropdownMenuLabel>
                     <DropdownMenuRadioItem v-for="(workflow) in workflows.filter((workflow) => workflow.category == 'To do')" :key="workflow.id" :value="workflow.id">
-                        <div class="bg-white px-[.4em] py-[.3em] rounded w-fit font-bold text-[.8em] text-black uppercase leading-[1em]">
+                        <div class="bg-white px-[.4em] py-[.3em] rounded w-fit font-bold text-[1.0em] text-black uppercase leading-[1em]">
                             {{ workflow.name }}
                         </div>
                     </DropdownMenuRadioItem>
                     <DropdownMenuLabel>In Progress</DropdownMenuLabel>
                     <DropdownMenuRadioItem v-for="(workflow) in workflows.filter((workflow) => workflow.category == 'In Progress')" :key="workflow.id" :value="workflow.id">
-                        <div class="bg-blue-300 px-[.4em] py-[.3em] rounded w-fit font-bold text-[.8em] text-black uppercase leading-[1em]">
+                        <div class="bg-blue-300 px-[.4em] py-[.3em] rounded w-fit font-bold text-[1.0em] text-black uppercase leading-[1em]">
                             {{ workflow.name }}
                         </div>
                     </DropdownMenuRadioItem>
                     <DropdownMenuLabel>Done</DropdownMenuLabel>
                     <DropdownMenuRadioItem v-for="(workflow) in workflows.filter((workflow) => workflow.category == 'Done')" :key="workflow.id" :value="workflow.id">
-                        <div class="bg-green-300 px-[.4em] py-[.3em] rounded w-fit font-bold text-[.8em] text-black uppercase leading-[1em]">
+                        <div class="bg-green-300 px-[.4em] py-[.3em] rounded w-fit font-bold text-[1.0em] text-black uppercase leading-[1em]">
                             {{ workflow.name }}
                         </div>
                     </DropdownMenuRadioItem>

@@ -1,15 +1,15 @@
 <template>
     <div class="flex flex-col">
         <div class="h-0">
-            <p class="p-[.8em] font-bold text-[.6em] text-white/50 uppercase">Keyboard ({{ keyTypeHistory.length }}) {{ keyTypeHistory.slice(-4) }}</p>
+            <p class="p-[.8em] font-bold text-[.8em] text-white/50 uppercase">Keyboard ({{ keyTypeHistory.length }}) {{ keyTypeHistory.slice(-4) }}</p>
             <div class="">
                 <input id="shortcut" type="text" v-model="keyTypeHistory" @keydown="handleKeyPress" @keyup="handleKeyUp" :autofocus="true" placeholder="Type anything" class="px-[.8em] py-[.4em] border-b w-full">
             </div>
         </div>
         <div class="bg-black pb-[.8em] border-b">
-            <p class="p-[.8em] font-bold text-[.6em] text-white/50 uppercase">Focus</p>
+            <p class="p-[.8em] font-bold text-[.8em] text-white/50 uppercase">Focus</p>
             <div class="mb-[.8em] pb-[.8em] border-b">
-                <pre class="px-[.8em] text-[.8em]">
+                <pre class="px-[.8em] text-[1.0em]">
                     <table class="table border w-full table-fixed">
                         <tr>
                             <td class="px-[.2em] border">keyTypeHistory</td>
@@ -25,14 +25,14 @@
                         </tr>
                     </table>
                 </pre>
-                <pre class="px-[.8em] text-[.8em]">{{ !isFocused ? 'No Focus' : '' }}</pre>
-                <pre class="px-[.8em] text-[.8em]">{{ isFocused && focusId == '' ? 'Focus to other input' : '' }}</pre>
-                <pre class="px-[.8em] text-[.8em]">{{ focusId == 'shortcut' ? 'Focus to shortcut' : '' }}</pre>
+                <pre class="px-[.8em] text-[1.0em]">{{ !isFocused ? 'No Focus' : '' }}</pre>
+                <pre class="px-[.8em] text-[1.0em]">{{ isFocused && focusId == '' ? 'Focus to other input' : '' }}</pre>
+                <pre class="px-[.8em] text-[1.0em]">{{ focusId == 'shortcut' ? 'Focus to shortcut' : '' }}</pre>
             </div>
         </div>
         <div class="bg-black pb-[.8em] border-b">
-            <p class="p-[.8em] font-bold text-[.6em] text-white/50 uppercase">Event Dump</p>
-            <pre class="px-[.8em] text-[.8em]">{{ eventKey }}</pre>
+            <p class="p-[.8em] font-bold text-[.8em] text-white/50 uppercase">Event Dump</p>
+            <pre class="px-[.8em] text-[1.0em]">{{ eventKey }}</pre>
         </div>
     </div>
 </template>

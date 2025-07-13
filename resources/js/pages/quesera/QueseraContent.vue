@@ -6,7 +6,7 @@
         <div class="flex-1 h-[calc(100vh-3.6em)] overflow-y-scroll">
             <slot name="center" v-if="$slots.center" />
             <div v-else class="place-items-center grid h-[calc(100vh-3.6em)]">
-                <div class="text-[.8em]">
+                <div class="text-[1.0em]">
                     <Bean :size="253" class="opacity-10 blur-xs" />
                 </div>
             </div>

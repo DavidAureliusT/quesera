@@ -3,7 +3,7 @@
         <div class="flex-none px-[.8em] border-t w-[8em] h-[1.8em] align-middle"></div>
         <div class="flex-1 px-[.8em] border-t h-[1.8em] align-middle">
             <form @submit.prevent="blurActiveElement">
-                <input type="text" placeholder="What's need to be done?" v-model="newTaskForm.summary" @blur="submit" class="w-full placeholder:text-[.8em]">
+                <input type="text" placeholder="What's need to be done?" v-model="newTaskForm.summary" @blur="submit" class="w-full placeholder:text-[1.0em]">
                 <input type="submit" hidden />
             </form>
         </div>

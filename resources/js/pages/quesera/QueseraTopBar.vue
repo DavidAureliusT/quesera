@@ -24,8 +24,13 @@
                     <PanelRight :size="16" class="text-orange-500" />
                 </div>
             </div>
-            <div class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
-                <PanelBottom :size="16" />
+            <div>
+                <div v-if="bottomPanelStatus == 'close'" @click="updateBottomPanelStatus('open')" class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
+                    <PanelBottom :size="16" />
+                </div>
+                <div v-else @click="updateBottomPanelStatus('close')" class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
+                    <PanelBottom :size="16" class="text-orange-500" />
+                </div>
             </div>
             <div>
                 <div v-if="leftPanelStatus == 'close'" @click="updateLeftPanelStatus('open')" class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
@@ -51,13 +56,15 @@ import TopBarCenterGroup from './QueseraTopBarCenterGroup.vue';
 import TopBarClock from './QueseraTopBarClock.vue';
 import { useLeftPanelStatus } from '@/composables/useLeftPanelStatus';
 import { useRightPanelStatus } from '@/composables/useRightPanelStatus';
-// import { useRightPanel } from '@/composables/useRightPanel';
+import { useBottomPanelStatus } from '@/composables/useBottomPanelStatus';
+
 
 const timezoneCurrent = "Asia/Jakarta";
 
 const { leftPanelStatus, updateLeftPanelStatus } = useLeftPanelStatus();
 const { rightPanelStatus, updateRightPanelStatus } = useRightPanelStatus();
-// const { isOpenRightPanel, toggleRightPanel } = useRightPanel();
+const { bottomPanelStatus, updateBottomPanelStatus } = useBottomPanelStatus();
+
 
 
 </script>

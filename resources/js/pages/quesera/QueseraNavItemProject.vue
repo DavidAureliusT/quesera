@@ -1,10 +1,10 @@
 <template>
     <Link :key="item.id" :href="item.href" class="flex flex-row hover:bg-white/20 px-[.8em] py-[.2em]" :class="classes">
     <div class="w-[3em]">
-        <p class="opacity-50 font-mono text-[.8em]">{{ item.key }}</p>
+        <p class="opacity-50 font-mono text-[1.0em]">{{ item.key }}</p>
     </div>
     <div class="flex-1">
-        <p class="text-[.8em]">{{ item.name }}</p>
+        <p class="text-[1.0em]">{{ item.name }}</p>
     </div>
     </Link>
 </template>

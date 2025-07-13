@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-between items-center pl-[.8em] border-b">
-        <p class="font-bold text-[.6em] text-white/50 uppercase">Projects</p>
+        <p class="font-bold text-[.8em] text-white/50 uppercase">Projects</p>
         <QueseraFormCreateProject>
             <template #trigger>
                 <div class="hover:bg-white/10 m-[.2em] p-[.2em] rounded transition-all">

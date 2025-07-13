@@ -1,5 +1,5 @@
 <template>
-    <input id="shortcut" type="text" v-model="keyTypeHistory" @keydown="handleKeyPress" @keyup="handleKeyUp" :autofocus="true" placeholder="Type anything" class="bg-transparent px-[.8em] w-full h-0">
+    <input id="shortcut" type="text" autocomplete="off" v-model="keyTypeHistory" @keydown="handleKeyPress" @keyup="handleKeyUp" :autofocus="true" placeholder="Type anything" class="bg-transparent px-[.8em] w-full h-0">
 </template>
 
 <script setup lang="ts">
@@ -8,9 +8,11 @@ import { ref, reactive, Reactive, onMounted, onUnmounted, watchEffect } from "vu
 
 import { useLeftPanelStatus } from "@/composables/useLeftPanelStatus";
 import { useRightPanelStatus } from "@/composables/useRightPanelStatus";
+import { useBottomPanelStatus } from "@/composables/useBottomPanelStatus";
 
 const { leftPanelStatus, updateLeftPanelStatus } = useLeftPanelStatus();
 const { rightPanelStatus, updateRightPanelStatus } = useRightPanelStatus();
+const { bottomPanelStatus, updateBottomPanelStatus } = useBottomPanelStatus();
 
 const hotKeyActions = [
     { key: '[', action: 'toggleLeftPanel' },
@@ -107,6 +109,13 @@ function handleKeyPress(event: KeyboardEvent) {
                     updateRightPanelStatus('close');
                 } else {
                     updateRightPanelStatus('open');
+                }
+            };
+            if (hotkey.action == 'toggleBottomPanel') {
+                if (bottomPanelStatus.value == 'open') {
+                    updateBottomPanelStatus('close');
+                } else {
+                    updateBottomPanelStatus('open');
                 }
             };
             return true;

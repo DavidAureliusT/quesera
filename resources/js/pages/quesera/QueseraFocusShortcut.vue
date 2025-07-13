@@ -2,7 +2,7 @@
     <div class="p-[.8em]">
         <label>Shortcut</label>
         <input id="shortcut" type="text" @keydown="keyboardListenerHandle" class="p-[.8em] border rounded w-full">
-        <pre class="text-[.8em]">{{ eventKey }}</pre>
+        <pre class="text-[1.0em]">{{ eventKey }}</pre>
     </div>
 </template>
 
