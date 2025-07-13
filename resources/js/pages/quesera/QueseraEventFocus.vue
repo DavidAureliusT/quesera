@@ -49,7 +49,7 @@ import {
 } from "vue";
 
 import { QueseraKeyboardEvent } from "@/types";
-import { useLeftPanel } from "@/composables/useLeftPanel";
+import { useLeftPanel } from "@/composables/_useLeftPanel";
 import { useRightPanel } from "@/composables/useRightPanel";
 
 const hotKeyActions = [

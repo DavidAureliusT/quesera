@@ -4,13 +4,13 @@
 
 <script setup lang="ts">
 import { QueseraKeyboardEvent } from "@/types";
-import { ref, Ref, reactive, Reactive, onMounted, onUnmounted, watchEffect } from "vue";
+import { ref, reactive, Reactive, onMounted, onUnmounted, watchEffect } from "vue";
 
-import { useLeftPanel } from "@/composables/useLeftPanel";
-import { useRightPanel } from "@/composables/useRightPanel";
+import { useLeftPanelStatus } from "@/composables/useLeftPanelStatus";
+import { useRightPanelStatus } from "@/composables/useRightPanelStatus";
 
-const { toggleLeftPanel } = useLeftPanel();
-const { toggleRightPanel } = useRightPanel();
+const { leftPanelStatus, updateLeftPanelStatus } = useLeftPanelStatus();
+const { rightPanelStatus, updateRightPanelStatus } = useRightPanelStatus();
 
 const hotKeyActions = [
     { key: '[', action: 'toggleLeftPanel' },
@@ -18,9 +18,9 @@ const hotKeyActions = [
     { key: '\\', action: 'toggleBottomPanel' },
 ]
 
-const isFocused: Ref<boolean> = ref(false);
-const focusId: Ref<string> = ref('');
-const keyTypeHistory: Ref<string> = ref('');
+const isFocused = ref<boolean>(false);
+const focusId = ref<string>('');
+const keyTypeHistory = ref<string>('');
 
 
 onMounted(() => {
@@ -95,8 +95,20 @@ function handleKeyPress(event: KeyboardEvent) {
     hotKeyActions.find((hotkey) => {
         if (hotkey.key == event.key) {
             console.log('hot key action: ' + hotkey.action);
-            if (hotkey.action == 'toggleLeftPanel') toggleLeftPanel();
-            if (hotkey.action == 'toggleRightPanel') toggleRightPanel();
+            if (hotkey.action == 'toggleLeftPanel') {
+                if (leftPanelStatus.value == 'open') {
+                    updateLeftPanelStatus('close');
+                } else {
+                    updateLeftPanelStatus('open');
+                }
+            };
+            if (hotkey.action == 'toggleRightPanel') {
+                if (rightPanelStatus.value == 'open') {
+                    updateRightPanelStatus('close');
+                } else {
+                    updateRightPanelStatus('open');
+                }
+            };
             return true;
         }
     });

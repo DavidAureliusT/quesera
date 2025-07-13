@@ -16,16 +16,26 @@
             <div class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
                 <UserCircle :size="16" />
             </div>
-            <div @click="toggleRightPanel" class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
-                <PanelRight :size="16" :class="{ 'text-orange-500': !!isOpenRightPanel }" />
+            <div>
+                <div v-if="rightPanelStatus == 'close'" @click="updateRightPanelStatus('open')" class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
+                    <PanelRight :size="16" />
+                </div>
+                <div v-else @click="updateRightPanelStatus('close')" class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
+                    <PanelRight :size="16" class="text-orange-500" />
+                </div>
             </div>
             <div class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
                 <PanelBottom :size="16" />
             </div>
-            <div @click="toggleLeftPanel" class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
-                <PanelLeft :size="16" :class="{ 'text-orange-500': !!isOpenLeftPanel }" />
+            <div>
+                <div v-if="leftPanelStatus == 'close'" @click="updateLeftPanelStatus('open')" class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
+                    <PanelLeft :size="16" />
+                </div>
+                <div v-else @click="updateLeftPanelStatus('close')" class="hover:bg-white/10 my-[.2em] p-[.2em] rounded transition-all">
+                    <PanelLeft :size="16" class="text-orange-500" />
+                </div>
             </div>
-            <!-- {{ isOpenLeftPanel == true }} -->
+
         </TopBarSideGroup>
     </header>
 </template>
@@ -39,13 +49,15 @@ import QueseraLogoSmall from './QueseraLogoSmall.vue';
 import TopBarSideGroup from './QueseraTopBarSideGroup.vue';
 import TopBarCenterGroup from './QueseraTopBarCenterGroup.vue';
 import TopBarClock from './QueseraTopBarClock.vue';
-import { useLeftPanel } from '@/composables/useLeftPanel';
-import { useRightPanel } from '@/composables/useRightPanel';
+import { useLeftPanelStatus } from '@/composables/useLeftPanelStatus';
+import { useRightPanelStatus } from '@/composables/useRightPanelStatus';
+// import { useRightPanel } from '@/composables/useRightPanel';
 
 const timezoneCurrent = "Asia/Jakarta";
 
-const { isOpenLeftPanel, toggleLeftPanel } = useLeftPanel();
-const { isOpenRightPanel, toggleRightPanel } = useRightPanel();
+const { leftPanelStatus, updateLeftPanelStatus } = useLeftPanelStatus();
+const { rightPanelStatus, updateRightPanelStatus } = useRightPanelStatus();
+// const { isOpenRightPanel, toggleRightPanel } = useRightPanel();
 
 
 </script>
