@@ -2,23 +2,15 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
-use App\Models\Project;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/day-1', fn() => Inertia::render('DayOne'))->name('day-1');
-Route::get('/day-2', fn() => Inertia::render('DayTwo'))->name('day-2');
-Route::get('/day-3', fn() => to_route('projects.index'))->name('day-3');
 
 Route::get('/server', fn() => $_SERVER);
 Route::get('/globals', fn() => $GLOBALS);
 Route::get('/tz', fn() => "TIMEZONE");
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', fn() => Inertia::render('Compas', [
-        //
-    ]))->name('home');
-    Route::get('/dashboard', fn() => Inertia::render('Dashboard'))->name('dashboard');
+    Route::get('/', fn() => to_route('projects.index'));
     Route::resources(
         resources: [
             'projects' => ProjectController::class,
