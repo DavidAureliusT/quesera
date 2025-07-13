@@ -10,7 +10,7 @@ Route::get('/globals', fn() => $GLOBALS);
 Route::get('/tz', fn() => "TIMEZONE");
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', fn() => to_route('projects.index'));
+    Route::get('/', fn() => to_route('projects.index'))->name('home');
     Route::resources(
         resources: [
             'projects' => ProjectController::class,

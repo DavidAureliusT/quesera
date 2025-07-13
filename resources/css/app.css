@@ -197,4 +197,7 @@
     input {
         @apply focus:outline-0 text-[.8em] leading-[.8em];
     }
+    pre {
+        @apply text-[.6em]
+    }
 }

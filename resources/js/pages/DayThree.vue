@@ -10,20 +10,18 @@
             <QueseraContentProject :project="project" />
         </template>
         <template #rightSide>
-            Hello Right Panel
+            <pre>{{ page }}</pre>
         </template>
 
     </QueseraShell>
 </template>
 
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import { Project } from '@/types';
 
 import Toaster from '@/components/ui/toast/Toaster.vue'
-
 import QueseraShell from './quesera/QueseraShell.vue';
-
 import QueseraContentProject from './quesera/QueseraContentProject.vue';
 import QueseraNavProject from './quesera/QueseraNavProject.vue';
 
@@ -33,5 +31,7 @@ interface Props {
 }
 
 defineProps<Props>();
+
+const page = usePage();
 
 </script>
