@@ -43,19 +43,19 @@ watchEffect(() => {
                 }
             }
 
-            // Sort by point
-            if (filters.sorting.point !== 'default') {
-                if (a.point !== b.point) {
-                    return filters.sorting.point === 'ascending' ? a.point - b.point : b.point - a.point;
-                }
-            }
-
             // Sort by status_id
             if (filters.sorting.status_id !== 'default') {
                 const statusA = parseInt(a.status_id);
                 const statusB = parseInt(b.status_id);
                 if (statusA !== statusB) {
                     return filters.sorting.status_id === 'ascending' ? statusA - statusB : statusB - statusA;
+                }
+            }
+
+            // Sort by point
+            if (filters.sorting.point !== 'default') {
+                if (a.point !== b.point) {
+                    return filters.sorting.point === 'ascending' ? a.point - b.point : b.point - a.point;
                 }
             }
 

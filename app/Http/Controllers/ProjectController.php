@@ -16,7 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return Inertia::render('DayThree');
+        return Inertia::render('Main');
     }
 
     /**
@@ -91,7 +91,7 @@ class ProjectController extends Controller
      */
     public function show(String $project_key)
     {
-        return Inertia::render('DayThree', [
+        return Inertia::render('Main', [
             'project' => Project::where('key', $project_key)->first()->toResource(),
         ]);
     }

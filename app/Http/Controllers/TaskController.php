@@ -5,28 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(String $project_key)
-    {
-        return Inertia::render('projects/tasks/Create', [
-            'project' => Project::where('key', $project_key)->first()
-        ]);
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -59,23 +40,16 @@ class TaskController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Task $task)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, String $project_key, String $task_key)
     {
-        Task::where('key', $task_key)->update($request->validate([
-            'summary' => ['required'],
-            'point' => ['required'],
-            'status_id' => ['required'],
-        ]));
+        Task::where('key', $task_key)
+            ->update($request->validate([
+                'summary' => ['required'],
+                'point' => ['required'],
+                'status_id' => ['required'],
+            ]));
 
         return redirect()->back();
     }
