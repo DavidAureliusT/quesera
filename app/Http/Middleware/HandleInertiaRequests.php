@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Resources\ProjectListItemResource;
 use App\Models\Project;
+use App\Models\Role;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -55,7 +56,8 @@ class HandleInertiaRequests extends Middleware
             'isOpenLeftPanel' => ! $request->hasCookie('isOpenLeftPanel') || $request->cookie('isOpenLeftPanel') === 'true',
             'isOpenRightPanel' => ! $request->hasCookie('isOpenRightPanel') || $request->cookie('isOpenRightPanel') === 'true',
             'compas' => [
-                'projectItems' => Project::all()->toResourceCollection(resourceClass: ProjectListItemResource::class)
+                'projectItems' => Project::all()->toResourceCollection(resourceClass: ProjectListItemResource::class),
+                'roles' => Role::all()
             ]
         ];
     }

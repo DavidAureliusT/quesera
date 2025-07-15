@@ -22,6 +22,7 @@ class ProjectResource extends JsonResource
             'type' => $this->type,
             'tasks' => TaskResource::collection($this->tasks),
             'workflows' => WorkflowResource::collection($this->workflows),
+            'accesses' => AccessResource::collection($this->accesses),
         ];
     }
 }

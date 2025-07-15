@@ -24,9 +24,16 @@ export type AppPageProps<T extends Record<string, unknown> = Record<string, unkn
     ziggy: Config & { location: string };
     sidebarOpen: boolean;
     compas: {
-        projectItems: ProjectItem[]
+        projectItems: NavItemProject[];
+        roles: Role[];
     }
 };
+
+export interface Role {
+    id: string;
+    name: string;
+}
+
 
 export interface User {
     id: string;
@@ -61,6 +68,16 @@ export interface Project {
     type: string;
     tasks?: Task[];
     workflows: Workflow[];
+    accesses: Access[];
+}
+
+export interface Access {
+    id: string;
+    user_id: string;
+    name: string;
+    email: string;
+    role_id: string;
+    role_name: string;
 }
 
 export interface Workflow {
