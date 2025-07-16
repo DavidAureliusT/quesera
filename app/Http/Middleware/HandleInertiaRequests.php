@@ -53,10 +53,10 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'isOpenLeftPanel' => ! $request->hasCookie('isOpenLeftPanel') || $request->cookie('isOpenLeftPanel') === 'true',
-            'isOpenRightPanel' => ! $request->hasCookie('isOpenRightPanel') || $request->cookie('isOpenRightPanel') === 'true',
             'compas' => [
-                'projectItems' => Project::all()->toResourceCollection(resourceClass: ProjectListItemResource::class),
+                'projectItems' => [
+                    'myProjects' => $request->user()?->projects->toResourceCollection(resourceClass: ProjectListItemResource::class),
+                ],
                 'roles' => Role::all()
             ]
         ];

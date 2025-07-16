@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\TaskResource;
 use App\Models\Project;
+use App\Models\Role;
 use App\Models\Workflow;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -71,6 +73,10 @@ class ProjectController extends Controller
                 ]),
             ]);
         }
+        $project->accesses()->create([
+            'role_id' => Role::$ADMINISTRATOR_ID,
+            'user_id' => Auth::user()->id
+        ]);
 
         return to_route(
             route: 'projects.show',

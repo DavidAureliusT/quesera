@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import { Project } from '@/types';
 
 import Toaster from '@/components/ui/toast/Toaster.vue'
@@ -13,7 +13,7 @@ interface Props {
 
 defineProps<Props>();
 
-// const page = usePage();
+const page = usePage();
 
 </script>
 
@@ -34,7 +34,7 @@ defineProps<Props>();
                     <p class="font-bold text-[.6em] text-white/50 uppercase">Diagnostic</p>
                 </div>
                 <div class="bg-black p-[.8em] h-[calc(100vh-(3*1.8em))] overflow-y-scroll">
-                    <pre>{{ project?.accesses }}</pre>
+                    <pre>{{ page.props.auth }}</pre>
                 </div>
             </div>
         </template>
