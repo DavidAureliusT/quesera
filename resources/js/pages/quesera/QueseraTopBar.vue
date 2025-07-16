@@ -31,8 +31,8 @@
                         </DropdownMenuItem>
                     </DropdownMenuGroup> -->
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>
-                        <Link class="text-red-600" method="post" :href="route('logout')" @click="handleLogout" as="button">
+                    <DropdownMenuItem :as-child="true">
+                        <Link class="block w-full text-red-600" method="post" :href="route('logout')" @click="handleLogout" as="button">
                         Log out
                         </Link>
                     </DropdownMenuItem>
