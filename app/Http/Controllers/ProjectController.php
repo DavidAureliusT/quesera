@@ -74,7 +74,7 @@ class ProjectController extends Controller
             ]);
         }
         $project->accesses()->create([
-            'role_id' => Role::$ADMINISTRATOR_ID,
+            'role_id' => Role::ADMINISTRATOR_ID,
             'user_id' => Auth::user()->id
         ]);
 

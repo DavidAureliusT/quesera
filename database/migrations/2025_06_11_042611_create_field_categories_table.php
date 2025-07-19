@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('type');
         });
 
-        DB::table('field_categories')->insert(
+        DB::table('field_categories')->insert([
             ['type' => 'Advanced'],
             ['type' => 'Date'],
             ['type' => 'Label'],
@@ -27,7 +27,7 @@ return new class extends Migration
             ['type' => 'Select'],
             ['type' => 'System'],
             ['type' => 'Text'],
-        );
+        ]);
     }
 
     /**

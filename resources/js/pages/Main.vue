@@ -22,13 +22,13 @@ const page = usePage();
 
     <Head title="Projects" />
     <QueseraShell>
-        <template #leftSide>
+        <template #rightSide>
             <QueseraNavProject />
         </template>
         <template #center v-if="project">
             <QueseraContentProject :project="project" />
         </template>
-        <template #rightSide>
+        <template #leftSide>
             <div class="flex flex-col">
                 <div class="flex justify-between items-center px-[.8em] border-b h-[1.8em]">
                     <p class="font-bold text-[.6em] text-white/50 uppercase">Diagnostic</p>

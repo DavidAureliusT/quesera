@@ -13,7 +13,7 @@ interface Props {
 
 defineProps<Props>();
 
-const menuActive = ref('Access');
+const menuActive = ref('List');
 
 </script>
 

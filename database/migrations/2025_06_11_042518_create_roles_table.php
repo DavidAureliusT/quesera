@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('name');
         });
 
-        DB::table('roles')->insert(
-            ['name' => 'Administrator'],
-            ['name' => 'Member'],
-            ['name' => 'Viewer'],
-        );
+        DB::table('roles')->insert([
+            ['id' => 1, 'name' => 'Administrator'],
+            ['id' => 2, 'name' => 'Member'],
+            ['id' => 3, 'name' => 'Viewer']
+        ]);
     }
 
     /**
