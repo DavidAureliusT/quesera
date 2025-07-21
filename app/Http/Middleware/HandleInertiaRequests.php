@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+
 class HandleInertiaRequests extends Middleware
 {
     /**

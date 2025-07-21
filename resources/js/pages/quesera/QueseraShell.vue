@@ -16,7 +16,7 @@ const page = usePage();
 </script>
 
 <template>
-    <div class="relative border-2 rounded-xl h-screen overflow-clip">
+    <div class="relative border h-screen overflow-clip">
         <div class="flex flex-col">
             <QueseraTopBar />
             <div class="flex flex-1 divide-x w-full">
@@ -28,8 +28,20 @@ const page = usePage();
                         <slot name="center" />
                     </div>
                     <div v-else class="place-items-center grid h-[calc(100vh-3.6em)]">
-                        <div class="text-[1.0em]">
-                            <Bean :size="253" class="opacity-10 blur-xs" />
+                        <div class="flex flex-col items-center gap-2">
+                            <Bean :size="253" class="opacity-100 text-primary" />
+                            <div class="flex gap-2 text-[1.0em]">
+                                <p class="opacity-50 font-medium text-right">Toggle Left Panel</p>
+                                <div class="place-items-center grid bg-foreground/20 rounded w-[2.4em] aspect-square font-bold text-[.6em] text-[var(--text-primary)] text-primary">[</div>
+                            </div>
+                            <div class="flex gap-2 text-[1.0em]">
+                                <p class="opacity-50 font-medium text-right">Toggle Right Panel</p>
+                                <div class="place-items-center grid bg-foreground/20 rounded w-[2.4em] aspect-square font-bold text-[.6em] text-[var(--text-primary)] text-primary">]</div>
+                            </div>
+                            <div class="flex gap-2 text-[1.0em]">
+                                <p class="opacity-50 font-medium text-right">Toggle Bottom Panel</p>
+                                <div class="place-items-center grid bg-foreground/20 rounded w-[2.4em] aspect-square font-bold text-[.6em] text-[var(--text-primary)] text-primary">\\</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -41,7 +53,7 @@ const page = usePage();
         </div>
         <Transition name="slide-fade" mode="out-in">
             <div v-if="bottomPanelStatus == 'open'" class="bottom-[2.4em] absolute inset-x-0 place-items-center grid">
-                <div class="bg-(--background) drop-shadow-lg drop-shadow-white/20 p-[.8em] border border-white/50 rounded-[1.2em] w-[60vw] h-[10em]">
+                <div class="bg-(--background) drop-shadow-lg drop-shadow-white/20 p-[.8em] border border-white/50 rounded-[1.2em] w-[60vw] h-[10em] overflow-y-scroll">
                     <pre>{{ page.props.auth.user }}</pre>
                 </div>
             </div>

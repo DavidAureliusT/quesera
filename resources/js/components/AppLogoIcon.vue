@@ -15,7 +15,7 @@ defineProps<Props>();
 </script>
 
 <template>
-    <div :class="className" v-bind="$attrs" class="flex justify-center items-center rounded-md size-8 aspect-square text-sidebar-primary-foreground animate-bounce">
-        <Bean :size="24" />
+    <div :class="className" v-bind="$attrs" class="flex justify-center items-center rounded-md aspect-square text-sidebar-primary-foreground">
+        <Bean :size="24" class="text-primary" />
     </div>
 </template>

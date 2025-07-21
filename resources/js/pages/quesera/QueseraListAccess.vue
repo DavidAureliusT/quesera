@@ -73,7 +73,7 @@ import {
 </script>
 
 <template>
-    <div class="bg-black h-[calc(100vh-(2*1.8em)-(5*1.8em))] overflow-y-scroll">
+    <div class="h-[calc(100vh-(2*1.8em)-(5*1.8em))] overflow-y-scroll">
         <div class="flex flex-row justify-between gap-[.4em] p-[.8em]">
             <Select>
                 <SelectTrigger class="w-[180px]">

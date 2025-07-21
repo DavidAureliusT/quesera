@@ -11,6 +11,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         resources: [
             'projects' => ProjectController::class,
             'projects.tasks' => TaskController::class,
+
         ],
         options: [
             'parameters' => [
