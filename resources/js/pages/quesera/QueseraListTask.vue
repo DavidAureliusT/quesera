@@ -1,3 +1,13 @@
+<template>
+    <div class="m-[1em] border rounded-lg overflow-clip">
+        <QueseraListHeaderTask :sorting="filters.sorting" @update-filter="handleUpdateSorting" />
+        <div class="border-t h-[calc(100vh-(11*1.8em))] overflow-y-auto">
+            <QueseraListItemTask v-for="task in filteredTasks.data" :task="task" :workflows="project.workflows" :key="task.key" />
+        </div>
+        <QueseraListCreateTask :project_key="project.key" />
+    </div>
+</template>
+
 <script setup lang="ts">
 import { Project, Task } from '@/types';
 import { reactive, Reactive, watchEffect } from "vue";
@@ -71,13 +81,3 @@ function handleUpdateSorting(column: string, order: string) {
 }
 
 </script>
-
-<template>
-    <div class="m-[1em] border rounded-lg overflow-clip">
-        <QueseraListHeaderTask :sorting="filters.sorting" @update-filter="handleUpdateSorting" />
-        <div class="border-t h-[calc(100vh-18em-1.8em)] overflow-y-auto">
-            <QueseraListItemTask v-for="task in filteredTasks.data" :task="task" :workflows="project.workflows" :key="task.key" />
-        </div>
-        <QueseraListCreateTask :project_key="project.key" />
-    </div>
-</template>

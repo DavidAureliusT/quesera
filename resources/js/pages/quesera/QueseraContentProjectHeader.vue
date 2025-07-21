@@ -1,3 +1,13 @@
+<template>
+    <div class="px-[.8em] py-[.4em]">
+        <form @submit.prevent="blurActiveElement">
+            <input type="text" v-model="projectForm.name" @blur="submit" class="font-bold text-[2.4em] leading-0">
+            <input type="submit" hidden />
+        </form>
+        <p class="opacity-50">Key: <span class="font-bold">{{ project.key }}</span></p>
+    </div>
+</template>
+
 <script setup lang="ts">
 import { useForm } from "@inertiajs/vue3";
 import { Project } from "@/types";
@@ -33,13 +43,3 @@ const submit = () => {
     }
 }
 </script>
-
-<template>
-    <div class="px-[.8em] py-[.4em] h-[calc(3*1.8em)]">
-        <form @submit.prevent="blurActiveElement">
-            <input type="text" v-model="projectForm.name" @blur="submit" class="font-bold text-[2.4em] leading-0">
-            <input type="submit" hidden />
-        </form>
-        <p class="opacity-50">Key: <span class="font-bold">{{ project.key }}</span></p>
-    </div>
-</template>

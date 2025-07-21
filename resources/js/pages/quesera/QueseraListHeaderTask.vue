@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row bg-white/5 divide-x">
+    <div class="flex flex-row bg-sidebar divide-x">
         <div class="flex flex-none justify-between items-center px-[.8em] border-b w-[8em] h-[1.8em] align-middle">
             <p class="text-white/50">Key</p>
             <ChevronsUpDown @click="$emit('updateFilter', 'key', 'ascending')" v-if="sorting.key == 'default'" :size="16" class="opacity-50 hover:opacity-100" />

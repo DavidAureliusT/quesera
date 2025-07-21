@@ -1,19 +1,25 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import { Project } from '@/types';
 
 import Toaster from '@/components/ui/toast/Toaster.vue'
 import QueseraShell from './quesera/QueseraShell.vue';
 import QueseraContentProject from './quesera/QueseraContentProject.vue';
+import QueseraContentUserProfile from './quesera/QueseraContentUserProfile.vue';
 import QueseraNavProject from './quesera/QueseraNavProject.vue';
+import QueseraContentUserChangePassword from './quesera/QueseraContentUserChangePassword.vue';
 
 interface Props {
-    project?: Project
+    project?: Project,
+    profile?: {
+        mustVerifyEmail: boolean;
+        status?: string;
+    },
 }
 
 defineProps<Props>();
 
-// const page = usePage();
+const page = usePage();
 
 </script>
 
@@ -22,19 +28,21 @@ defineProps<Props>();
 
     <Head title="Projects" />
     <QueseraShell>
-        <template #leftSide>
+        <template #rightSide>
             <QueseraNavProject />
         </template>
-        <template #center v-if="project">
-            <QueseraContentProject :project="project" />
+        <template #center v-if="project || profile || page.url === '/settings/password'">
+            <QueseraContentProject v-if="project" :project="project" />
+            <QueseraContentUserProfile v-if="profile" :mustVerifyEmail="profile.mustVerifyEmail" :status="profile.status" />
+            <QueseraContentUserChangePassword v-if="page.url == '/settings/password'" />
         </template>
-        <template #rightSide>
+        <template #leftSide>
             <div class="flex flex-col">
                 <div class="flex justify-between items-center px-[.8em] border-b h-[1.8em]">
                     <p class="font-bold text-[.6em] text-white/50 uppercase">Diagnostic</p>
                 </div>
                 <div class="bg-black p-[.8em] h-[calc(100vh-(3*1.8em))] overflow-y-scroll">
-                    <pre>{{ project?.accesses }}</pre>
+                    <pre>{{ page }}</pre>
                 </div>
             </div>
         </template>

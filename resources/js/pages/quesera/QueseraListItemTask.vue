@@ -19,28 +19,28 @@
             <DropdownMenuTrigger as-child>
                 <div class="flex flex-row items-center px-[.8em] border-b w-[8em] h-[1.8em]">
                     <div v-if="task.status_category == 'To do'" class="bg-white px-[.4em] py-[.3em] rounded w-fit font-bold text-[.7em] text-black uppercase leading-[1em]">{{ task.status_name }}</div>
-                    <div v-if="task.status_category == 'In Progress'" class="bg-blue-300 px-[.4em] py-[.3em] rounded w-fit font-bold text-[.7em] text-black uppercase leading-[1em]">{{ task.status_name }}</div>
-                    <div v-if="task.status_category == 'Done'" class="bg-green-300 px-[.4em] py-[.3em] rounded w-fit font-bold text-[.7em] text-black uppercase leading-[1em]">{{ task.status_name }}</div>
+                    <div v-if="task.status_category == 'In Progress'" class="bg-process px-[.4em] py-[.3em] rounded w-fit font-bold text-[.7em] text-black uppercase leading-[1em]">{{ task.status_name }}</div>
+                    <div v-if="task.status_category == 'Done'" class="bg-primary px-[.4em] py-[.3em] rounded w-fit font-bold text-[.7em] text-black uppercase leading-[1em]">{{ task.status_name }}</div>
                 </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent class="w-48">
                 <DropdownMenuRadioGroup v-model="taskForm.status_id" v-on:vue:updated="submit">
                     <DropdownMenuLabel>To do</DropdownMenuLabel>
                     <DropdownMenuRadioItem v-for="(workflow) in workflows.filter((workflow) => workflow.category == 'To do')" :key="workflow.id" :value="workflow.id">
-                        <div class="bg-white px-[.4em] py-[.3em] rounded w-fit font-bold text-[1.0em] text-black uppercase leading-[1em]">
-                            {{ workflow.name }}
+                        <div class="bg-white px-[.4em] rounded w-fit font-bold text-[1.0em] text-black uppercase leading-[1em]">
+                            <p>{{ workflow.name }}</p>
                         </div>
                     </DropdownMenuRadioItem>
                     <DropdownMenuLabel>In Progress</DropdownMenuLabel>
                     <DropdownMenuRadioItem v-for="(workflow) in workflows.filter((workflow) => workflow.category == 'In Progress')" :key="workflow.id" :value="workflow.id">
-                        <div class="bg-blue-300 px-[.4em] py-[.3em] rounded w-fit font-bold text-[1.0em] text-black uppercase leading-[1em]">
-                            {{ workflow.name }}
+                        <div class="bg-process px-[.4em] rounded w-fit font-bold text-[1.0em] text-black uppercase leading-[1em]">
+                            <p>{{ workflow.name }}</p>
                         </div>
                     </DropdownMenuRadioItem>
                     <DropdownMenuLabel>Done</DropdownMenuLabel>
                     <DropdownMenuRadioItem v-for="(workflow) in workflows.filter((workflow) => workflow.category == 'Done')" :key="workflow.id" :value="workflow.id">
-                        <div class="bg-green-300 px-[.4em] py-[.3em] rounded w-fit font-bold text-[1.0em] text-black uppercase leading-[1em]">
-                            {{ workflow.name }}
+                        <div class="bg-primary px-[.4em] rounded w-fit font-bold text-[1.0em] text-black uppercase leading-[1em]">
+                            <p>{{ workflow.name }}</p>
                         </div>
                     </DropdownMenuRadioItem>
                 </DropdownMenuRadioGroup>

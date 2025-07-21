@@ -1,22 +1,11 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import AppLayout from '@/layouts/AppLayout.vue';
-import SettingsLayout from '@/layouts/settings/Layout.vue';
-import { Head, useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { useForm } from '@inertiajs/vue3';
+import { ref } from "vue";
 
-import HeadingSmall from '@/components/HeadingSmall.vue';
+import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { type BreadcrumbItem } from '@/types';
-
-const breadcrumbItems: BreadcrumbItem[] = [
-    {
-        title: 'Password settings',
-        href: '/settings/password',
-    },
-];
 
 const passwordInput = ref<HTMLInputElement | null>(null);
 const currentPasswordInput = ref<HTMLInputElement | null>(null);
@@ -51,14 +40,13 @@ const updatePassword = () => {
 </script>
 
 <template>
-    <AppLayout :breadcrumbs="breadcrumbItems">
-
-        <Head title="Password settings" />
-
-        <SettingsLayout>
-            <div class="space-y-6">
-                <HeadingSmall title="Update password" description="Ensure your account is using a long, random password to stay secure" />
-
+    <div class="flex flex-col">
+        <div class="flex justify-between items-center pl-[.8em] border-b h-[1.8em]">
+            <p class="font-bold text-[.6em] text-white/50 uppercase">Change Password</p>
+        </div>
+        <div class="place-items-center grid h-[calc(100vh-(3*1.8em))]">
+            <div class="w-xl">
+                <p class="font-bold text-[2.4em]">Change Password</p>
                 <form @submit.prevent="updatePassword" class="space-y-6">
                     <div class="gap-2 grid">
                         <Label for="current_password">Current password</Label>
@@ -87,6 +75,6 @@ const updatePassword = () => {
                     </div>
                 </form>
             </div>
-        </SettingsLayout>
-    </AppLayout>
+        </div>
+    </div>
 </template>

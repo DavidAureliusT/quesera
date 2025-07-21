@@ -24,7 +24,9 @@ export type AppPageProps<T extends Record<string, unknown> = Record<string, unkn
     ziggy: Config & { location: string };
     sidebarOpen: boolean;
     compas: {
-        projectItems: NavItemProject[];
+        projectItems: {
+            myProjects: NavItemProject[]
+        };
         roles: Role[];
     }
 };

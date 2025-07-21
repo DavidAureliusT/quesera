@@ -11,7 +11,7 @@ const page = usePage();
     <div class="flex flex-col">
         <QueseraNavProjectTopBar />
         <div class="h-[calc(100vh-(3*1.8em))] overflow-y-scroll">
-            <QueseraNavItemProject v-for="(item, index) in page.props.compas.projectItems" :key="index" :item="item" />
+            <QueseraNavItemProject v-for="(item, index) in page.props.compas.projectItems.myProjects" :key="index" :item="item" />
         </div>
     </div>
 </template>

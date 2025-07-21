@@ -4,11 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -47,8 +50,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function projects(): HasManyThrough
+    public function projectAccesses(): HasMany
     {
-        return $this->hasManyThrough(Project::class, ProjectAccess::class);
+        return $this->hasMany(ProjectAccess::class);
+    }
+
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(Project::class, 'project_accesses', 'user_id', 'project_id');
     }
 }
