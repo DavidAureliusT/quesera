@@ -42,7 +42,7 @@ const page = usePage();
                     <p class="font-bold text-[.6em] text-white/50 uppercase">Diagnostic</p>
                 </div>
                 <div class="bg-black p-[.8em] h-[calc(100vh-(3*1.8em))] overflow-y-scroll">
-                    <pre>{{ page.url }}</pre>
+                    <pre>{{ page }}</pre>
                 </div>
             </div>
         </template>

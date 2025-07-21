@@ -53,7 +53,7 @@ const page = usePage();
         </div>
         <Transition name="slide-fade" mode="out-in">
             <div v-if="bottomPanelStatus == 'open'" class="bottom-[2.4em] absolute inset-x-0 place-items-center grid">
-                <div class="bg-(--background) drop-shadow-lg drop-shadow-white/20 p-[.8em] border border-white/50 rounded-[1.2em] w-[60vw] h-[10em] overflow-y-scroll">
+                <div class="bg-(--background) drop-shadow p-[.8em] border border-primary drop-shadow-primary/20 rounded-[1.2em] w-[60vw] h-[10em] overflow-y-scroll">
                     <pre>{{ page.props.auth.user }}</pre>
                 </div>
             </div>
