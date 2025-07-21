@@ -9,7 +9,7 @@ import { useBottomPanelStatus } from '@/composables/useBottomPanelStatus';
 
 const { leftPanelStatus } = useLeftPanelStatus();
 const { rightPanelStatus } = useRightPanelStatus();
-const { bottomPanelStatus } = useBottomPanelStatus();
+const { bottomPanelStatus, updateBottomPanelStatus } = useBottomPanelStatus();
 
 const page = usePage();
 
@@ -51,10 +51,17 @@ const page = usePage();
             </div>
             <QueseraBottomBar />
         </div>
-        <Transition name="slide-fade" mode="out-in">
-            <div v-if="bottomPanelStatus == 'open'" class="bottom-[2.4em] absolute inset-x-0 place-items-center grid">
-                <div class="bg-(--background) drop-shadow p-[.8em] border border-primary drop-shadow-primary/20 rounded-[1.2em] w-[60vw] h-[10em] overflow-y-scroll">
-                    <pre>{{ page.props.auth.user }}</pre>
+        <Transition name="overlay-fade" mode="out-in">
+            <div v-if="bottomPanelStatus == 'open'">
+                <div class="absolute inset-0 bg-black/90" @click="updateBottomPanelStatus('close')"></div>
+                <div class="bottom-[2.4em] absolute inset-x-0 place-items-center grid">
+                    <div class="bg-(--background) drop-shadow border border-primary drop-shadow-primary/20 rounded-xl w-[60vw] overflow-y-scroll">
+                        <div class="flex justify-between items-center px-[.8em] border-primary border-b h-[1.8em]">
+                            <p class="font-bold text-[.6em] uppercase">Diagnostic</p>
+                        </div>
+                        <pre class="px-[.8em] h-[50vh] overflow-y-scroll">{{ page.props.auth.user }}</pre>
+                        <!-- <pre class="px-[.8em] h-[calc(20em-.8em)] overflow-y-scroll">{{ page.props.auth.user }}</pre> -->
+                    </div>
                 </div>
             </div>
         </Transition>
@@ -75,6 +82,19 @@ const page = usePage();
 
 .slide-fade-leave-to {
     transform: translateY(100%);
+    opacity: 0;
+}
+
+.overlay-fade-enter-active,
+.overlay-fade-leave-active {
+    transition: all .01s ease-in-out;
+}
+
+.overlay-fade-enter-from {
+    opacity: 0;
+}
+
+.overlay-fade-leave-to {
     opacity: 0;
 }
 </style>
