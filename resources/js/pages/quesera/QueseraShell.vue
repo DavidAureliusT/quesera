@@ -3,6 +3,8 @@ import { usePage } from "@inertiajs/vue3";
 import QueseraTopBar from './QueseraTopBar.vue';
 import QueseraBottomBar from './QueseraBottomBar.vue';
 import { Bean } from 'lucide-vue-next';
+import Toaster from '@/components/ui/toast/Toaster.vue'
+
 import { useLeftPanelStatus } from '@/composables/useLeftPanelStatus';
 import { useRightPanelStatus } from '@/composables/useRightPanelStatus';
 import { useBottomPanelStatus } from '@/composables/useBottomPanelStatus';
@@ -16,6 +18,7 @@ const page = usePage();
 </script>
 
 <template>
+    <Toaster />
     <div class="relative border h-screen overflow-clip">
         <div class="flex flex-col">
             <QueseraTopBar />
@@ -32,15 +35,15 @@ const page = usePage();
                             <Bean :size="253" class="opacity-100 text-primary" />
                             <div class="flex gap-2 text-[1.0em]">
                                 <p class="opacity-50 font-medium text-right">Toggle Left Panel</p>
-                                <div class="place-items-center grid bg-foreground/20 rounded w-[2.4em] aspect-square font-bold text-[.6em] text-[var(--text-primary)] text-primary">[</div>
+                                <div class="place-items-center grid bg-foreground/20 rounded w-[2.4em] aspect-square font-bold text-[.6em] text-primary">[</div>
                             </div>
                             <div class="flex gap-2 text-[1.0em]">
                                 <p class="opacity-50 font-medium text-right">Toggle Right Panel</p>
-                                <div class="place-items-center grid bg-foreground/20 rounded w-[2.4em] aspect-square font-bold text-[.6em] text-[var(--text-primary)] text-primary">]</div>
+                                <div class="place-items-center grid bg-foreground/20 rounded w-[2.4em] aspect-square font-bold text-[.6em] text-primary">]</div>
                             </div>
                             <div class="flex gap-2 text-[1.0em]">
                                 <p class="opacity-50 font-medium text-right">Toggle Bottom Panel</p>
-                                <div class="place-items-center grid bg-foreground/20 rounded w-[2.4em] aspect-square font-bold text-[.6em] text-[var(--text-primary)] text-primary">\\</div>
+                                <div class="place-items-center grid bg-foreground/20 rounded w-[2.4em] aspect-square font-bold text-[.6em] text-primary">\\</div>
                             </div>
                         </div>
                     </div>
@@ -60,7 +63,6 @@ const page = usePage();
                             <p class="font-bold text-[.6em] uppercase">Diagnostic</p>
                         </div>
                         <pre class="px-[.8em] h-[50vh] overflow-y-scroll">{{ page.props.auth.user }}</pre>
-                        <!-- <pre class="px-[.8em] h-[calc(20em-.8em)] overflow-y-scroll">{{ page.props.auth.user }}</pre> -->
                     </div>
                 </div>
             </div>

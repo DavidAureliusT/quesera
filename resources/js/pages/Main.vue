@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { Head, usePage } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
 import { Project } from '@/types';
 
-import Toaster from '@/components/ui/toast/Toaster.vue'
 import QueseraShell from './quesera/QueseraShell.vue';
 import QueseraContentProject from './quesera/QueseraContentProject.vue';
 import QueseraContentUserProfile from './quesera/QueseraContentUserProfile.vue';
@@ -24,9 +23,6 @@ const page = usePage();
 </script>
 
 <template>
-    <Toaster />
-
-    <Head title="Projects" />
     <QueseraShell>
         <template #rightSide>
             <QueseraNavProject />
@@ -42,7 +38,7 @@ const page = usePage();
                     <p class="font-bold text-[.6em] text-white/50 uppercase">Diagnostic</p>
                 </div>
                 <div class="bg-black p-[.8em] h-[calc(100vh-(3*1.8em))] overflow-y-scroll">
-                    <pre>{{ page }}</pre>
+                    <pre>{{ page.props.compas }}</pre>
                 </div>
             </div>
         </template>

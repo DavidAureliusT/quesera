@@ -74,6 +74,7 @@ import {
 
 <template>
     <div class="h-[calc(100vh-(2*1.8em)-(5*1.8em))] overflow-y-scroll">
+
         <div class="flex flex-row justify-between gap-[.4em] p-[.8em]">
             <Select>
                 <SelectTrigger class="w-[180px]">
@@ -81,12 +82,14 @@ import {
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
+                        <SelectItem key="0" :value="0">All</SelectItem>
                         <SelectItem v-for="(role) in page.props.compas.roles" :key="role.id" :value="role.id">{{ role.name }}</SelectItem>
                     </SelectGroup>
                 </SelectContent>
             </Select>
             <Button variant="default" size="default">Add people</Button>
         </div>
+
         <QueseraListHeaderAccess :sorting="filters.sorting" @update-filter="handleUpdateSorting" />
         <QueseraListItemAccess v-for="(access) in props.project.accesses" :key="access.id" :access="access" />
 
