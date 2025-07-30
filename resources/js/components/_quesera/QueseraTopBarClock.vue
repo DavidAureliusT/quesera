@@ -12,5 +12,6 @@ const { currentTime, timeZoneAbbr } = useWorldClock(props.timezone)
 
 <template>
     <small class="p-[.8em] tracking-wide">
-        [{{ timeZoneAbbr }}] ({{ timezone }}) {{ currentTime.toLocaleTimeString('EN', { timeStyle: "medium" }) }}, {{ currentTime.toLocaleDateString('EN', { dateStyle: "full" }) }} </small>
+        [{{ timeZoneAbbr }}] ({{ timezone }}) {{ currentTime.toLocaleTimeString('EN', { timeStyle: "medium" }) }}, {{ currentTime.toLocaleDateString('EN', { dateStyle: "full" }) }}
+    </small>
 </template>

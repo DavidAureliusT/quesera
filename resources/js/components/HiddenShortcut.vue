@@ -1,10 +1,10 @@
 <template>
-    <input id="shortcut" type="text" autocomplete="off" v-model="keyTypeHistory" @keydown="handleKeyPress" @keyup="handleKeyUp" :autofocus="true" placeholder="Type anything" class="bg-transparent px-[.8em] w-full h-0">
+    <input id="shortcut" type="text" autocomplete="off" v-model="keyTypeHistory" @keydown="handleKeyPress" @keyup="handleKeyUp" :autofocus="true" placeholder="Type anything" class="h-0">
 </template>
 
 <script setup lang="ts">
 import { QueseraKeyboardEvent } from "@/types";
-import { ref, reactive, Reactive, onMounted, onUnmounted, watchEffect } from "vue";
+import { ref, reactive, onMounted, onUnmounted, watchEffect } from "vue";
 
 import { useLeftPanelStatus } from "@/composables/useLeftPanelStatus";
 import { useRightPanelStatus } from "@/composables/useRightPanelStatus";
@@ -46,7 +46,7 @@ watchEffect(() => {
 });
 
 
-const eventKey: Reactive<QueseraKeyboardEvent> = reactive({
+const eventKey = reactive<QueseraKeyboardEvent>({
     isComposing: false,
     code: "",
     key: "",

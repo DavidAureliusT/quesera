@@ -95,21 +95,17 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Project $project)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, String $project_key)
     {
-        Project::where('key', $project_key)->update($request->validate([
-            'name' => ['required'],
-        ]));
+        $request->validate([
+            'inputValue' => ['required', 'max:120'],
+        ]);
+
+        Project::where('key', $project_key)->update([
+            'name' => $request->input('inputValue')
+        ]);
 
         return redirect()->back();
     }

@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', fn() => to_route('projects.index'))->name('home');
-    Route::get('/dashboard', fn() => Inertia\Inertia::render('Dashboard'))->name('dashboard');
     Route::resources(
         resources: [
             'projects' => ProjectController::class,
