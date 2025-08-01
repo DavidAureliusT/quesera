@@ -46,9 +46,9 @@ class TaskController extends Controller
     {
         Task::where('key', $task_key)
             ->update($request->validate([
-                'summary' => ['required'],
-                'point' => ['required'],
-                'status_id' => ['required'],
+                'summary' => ['sometimes', 'required'],
+                'point' => ['sometimes', 'required'],
+                'status_id' => ['sometimes', 'required'],
             ]));
 
         return redirect()->back();

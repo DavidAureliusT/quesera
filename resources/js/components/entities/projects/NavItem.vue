@@ -12,9 +12,9 @@ interface Props {
 const props = defineProps<Props>();
 
 const classes = computed<string>(() => {
-    const _class = 'flex flex-row items-center hover:bg-primary/80 hover:text-white px-[.8em] py-[.2em] rounded m-[.4em]';
+    const _class = 'flex flex-row items-center hover:bg-primary/80 hover:text-white px-[.8em] py-[.2em] border border-dashed rounded m-[.4em]';
     if (props.item.href === page.url) return _class.concat(' bg-primary/80 text-white');
-    return _class.concat(' border border-dashed bg-primary/5');
+    return _class.concat(' bg-primary/5');
 });
 </script>
 

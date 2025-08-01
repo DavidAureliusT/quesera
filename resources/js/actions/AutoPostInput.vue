@@ -1,22 +1,25 @@
 <script setup lang="ts">
 import { useForm } from "@inertiajs/vue3";
 import { useToast } from '@/components/ui/toast/use-toast';
-import type { HTMLAttributes } from 'vue'
+import { type HTMLAttributes } from 'vue'
 import { cn } from '@/lib/utils'
 
 const { toast } = useToast();
 
 interface Props {
-    title: string,
+    type: 'text' | 'number'
+    class?: HTMLAttributes['class'],
     url: string,
-    inputValue?: string,
-    class?: HTMLAttributes['class']
+    attributeName: string,
+    inputValue: any,
+    title: string,
 }
 const props = defineProps<Props>()
 
 const form = useForm({
-    inputValue: props.inputValue
+    [props.attributeName]: props.inputValue
 })
+
 
 const blurActiveElement = () => {
     const activeElement = document.activeElement;
@@ -42,7 +45,7 @@ const postSubmit = () => {
 
 <template>
     <form @submit.prevent="blurActiveElement">
-        <input type="text" v-model="form.inputValue" @blur="postSubmit" :class="cn('leading-0', props.class)">
+        <input :type="type" v-model="form[attributeName]" @blur="postSubmit" :class="cn('leading-0 w-full', props.class)">
         <input type="submit" hidden />
     </form>
 </template>

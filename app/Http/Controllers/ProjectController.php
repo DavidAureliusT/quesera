@@ -99,13 +99,11 @@ class ProjectController extends Controller
      */
     public function update(Request $request, String $project_key)
     {
-        $request->validate([
-            'inputValue' => ['required', 'max:120'],
-        ]);
-
-        Project::where('key', $project_key)->update([
-            'name' => $request->input('inputValue')
-        ]);
+        Project::where('key', $project_key)->update(
+            $request->validate([
+                'name' => ['required', 'max:120'],
+            ])
+        );
 
         return redirect()->back();
     }
