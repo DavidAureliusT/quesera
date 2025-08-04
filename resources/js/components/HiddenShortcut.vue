@@ -26,13 +26,11 @@ const keyTypeHistory = ref<string>('');
 
 
 onMounted(() => {
-    console.log("onMounted()")
     window.addEventListener('focusin', checkInputFocus);
     window.addEventListener('focusout', checkInputFocus);
 });
 
 onUnmounted(() => {
-    console.log("onUnmounted()")
     window.removeEventListener('focusin', checkInputFocus);
     window.removeEventListener('focusout', checkInputFocus);
 });
@@ -71,11 +69,9 @@ function _reFocusToShortcut() {
         }
         clearInterval(interval)
     }, (1 * 1000));
-    console.log("_reFocusToShortcut()")
 }
 
 function _focusInputById(id: string) {
-    console.log('_focusInputById(' + id + ')')
     const el = document.getElementById(id) as HTMLInputElement | null
     el?.focus()
 }

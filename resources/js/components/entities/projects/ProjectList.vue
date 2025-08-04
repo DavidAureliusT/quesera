@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import { inject } from 'vue';
 import { Project } from '@/types';
 import TaskListItem from "@/components/entities/tasks/ListItem.vue";
+import RowCreateTask from '@/actions/RowCreateTask.vue';
 
-const project = inject<Project>('shared_project');
+defineProps<{ project?: Project }>()
 
 </script>
 
 <template>
-    <div class="flex flex-col w-[50vw]">
+    <div class="flex flex-col w-full">
+        <div class="flex">
+
+        </div>
         <TaskListItem v-for="(task, index) in project!.tasks" :key="index" :task="task" />
+        <RowCreateTask :project_key="project!.key" />
     </div>
 </template>

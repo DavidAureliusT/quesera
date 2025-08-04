@@ -1,7 +1,4 @@
 <script setup lang="ts">
-defineProps<{
-    value: string
-}>()
 </script>
 
 <template>
@@ -9,6 +6,5 @@ defineProps<{
         <div v-if="$slots.default">
             <slot />
         </div>
-        <div v-else class="place-items-center grid">{{ value }}</div>
     </div>
 </template>

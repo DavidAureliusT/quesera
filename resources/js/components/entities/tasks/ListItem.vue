@@ -2,6 +2,7 @@
 import { Task } from '@/types';
 
 import AutoPostInput from '@/actions/AutoPostInput.vue';
+import BadgeStatus from './BadgeStatus.vue';
 
 defineProps<{ task: Task }>()
 
@@ -18,9 +19,9 @@ defineProps<{ task: Task }>()
         <div class="px-[.8em] border-b w-[6em] h-[1.8em] text-center align-middle">
             <AutoPostInput type="number" :url="route('projects.tasks.update', { project_key: task.key.split('-')[0], task_key: task.key })" attribute-name="point" :input-value="task.point" title="Task Updated" />
         </div>
-        <!-- px-[.8em] border-b w-[8em] h-[1.8em] -->
-        <div class="flex-1">
-            {{ task.status_name }}
+        <div class="items-center place-items-center grid px-[.8em] border-b w-[8em] h-[1.8em]">
+            <!-- AutoPostDropdown -->
+            <BadgeStatus :status_category="task.status_category" :status_name="task.status_name" />
         </div>
     </div>
 </template>

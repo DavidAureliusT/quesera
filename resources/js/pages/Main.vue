@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { provide } from "vue";
-// import { usePage } from '@inertiajs/vue3';
 import { SharedProps } from '@/types';
 
 import NavProject from '@/components/entities/projects/Nav.vue';
@@ -8,11 +6,6 @@ import AppShell from '@/components/AppShell.vue';
 import ProjectRoot from "@/components/entities/projects/ProjectRoot.vue";
 
 const sharedProps = defineProps<SharedProps>();
-
-provide('shared_project', sharedProps.project);
-provide('shared_profile', sharedProps.profile);
-
-// const page = usePage();
 
 </script>
 
@@ -22,7 +15,7 @@ provide('shared_profile', sharedProps.profile);
             <NavProject />
         </template>
         <template #center>
-            <ProjectRoot />
+            <ProjectRoot :project="sharedProps.project" />
         </template>
         <template #leftSide>
             <!-- <div class="flex flex-col">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, ref } from 'vue';
+import { ref } from 'vue';
 import { Project } from '@/types';
 import ProjectBarTop from './ProjectBarTop.vue';
 import ProjectHeader from './ProjectHeader.vue';
@@ -11,12 +11,9 @@ import ProjectTabsListItem from './ProjectTabsListItem.vue';
 import ProjectTabsContent from './ProjectTabsContent.vue';
 import ProjectKanban from './ProjectKanban.vue';
 
-const project = inject<Project>('shared_project');
+defineProps<{ project?: Project }>()
 
-const views: Record<string, any> = {
-    'LIST': ProjectList,
-    'KANBAN': ProjectKanban,
-}
+const views = ['LIST', 'KANBAN']
 
 const activeView = ref<string>('LIST');
 
@@ -28,12 +25,16 @@ const activeView = ref<string>('LIST');
         <ProjectHeader class="h-[calc(3*1.8em)]" :project="project!" />
         <ProjectTabs>
             <ProjectTabsList class="h-[1.8em]">
-                <ProjectTabsListItem v-for="(_, key) of views" :key="key" :title="key" @click="() => activeView = key" :is-active="key == activeView" />
+                <ProjectTabsListItem v-for="(view, index) in views" :key="index" :title="view" @click="() => activeView = view" :is-active="view == activeView" />
             </ProjectTabsList>
             <ProjectTabsContent :value="activeView" class="h-[calc(100vh-(11*1.8em))]">
-                <keep-alive>
-                    <component :is="views[activeView]" />
-                </keep-alive>
+                <div v-if="activeView == 'LIST'">
+                    <ProjectList :project="project" />
+                </div>
+                <div v-else-if="activeView == 'KANBAN'">
+                    <ProjectKanban :project="project" />
+                </div>
+                <div v-else class="place-items-center grid">{{ activeView }}</div>
             </ProjectTabsContent>
         </ProjectTabs>
     </div>
