@@ -13,8 +13,15 @@ const page = usePage();
             <p class="font-bold text-[.6em] text-white/50 uppercase">Projects</p>
             <ButtonCreateProject />
         </div>
-        <div class="h-[calc(100vh-(3*1.8em))] overflow-y-scroll">
-            <NavItem v-for="(item, index) in page.props.compas.projectItems.myProjects" :key="index" :item="item" />
+        <div class="relative h-[calc(100vh-(3*1.8em))] overflow-y-scroll">
+            <div v-if="page.props.compas.projectItems.myProjects.length">
+                <NavItem v-for="(item, index) in page.props.compas.projectItems.myProjects" :key="index" :item="item" />
+            </div>
+            <div v-else>
+                <div class="absolute inset-0 place-items-center grid">
+                    <p class="text-foreground animate-pulse">No project</p>
+                </div>
+            </div>
         </div>
     </div>
 </template>

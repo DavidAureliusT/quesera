@@ -14,7 +14,7 @@ class Role extends Model
         'name',
     ];
 
-    const ADMINISTRATOR_ID = '1';
-    const MEMBER_ID = '2';
-    const VIEWER_ID = '3';
+    const ADMINISTRATOR_ID = '1'; // Lead
+    const MEMBER_ID = '2'; // Staff
+    const VIEWER_ID = '3'; // HR
 }
