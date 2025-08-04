@@ -8,11 +8,14 @@ const { toast } = useToast();
 
 interface Props {
     type: 'text' | 'number'
-    class?: HTMLAttributes['class'],
+    method: 'post' | 'put',
     url: string,
     attributeName: string,
-    inputValue: any,
     title: string,
+    inputValue?: any,
+    class?: HTMLAttributes['class'],
+    useReset?: boolean,
+    placeholder?: string,
 }
 const props = defineProps<Props>()
 
@@ -30,12 +33,13 @@ const blurActiveElement = () => {
 
 const postSubmit = () => {
     if (form.isDirty) {
-        form.put(props.url, {
+        form.submit(props.method, props.url, {
             onSuccess: () => {
                 toast({
                     title: props.title,
                     description: JSON.stringify(form.data()),
                 });
+                if (props.useReset) form.reset();
             }
         });
     }
@@ -45,7 +49,7 @@ const postSubmit = () => {
 
 <template>
     <form @submit.prevent="blurActiveElement">
-        <input :type="type" v-model="form[attributeName]" @blur="postSubmit" :class="cn('leading-0 w-full', props.class)">
+        <input :type="type" v-model="form[attributeName]" @blur="postSubmit" :class="cn('leading-0 w-full', props.class)" :placeholder="placeholder">
         <input type="submit" hidden />
     </form>
 </template>

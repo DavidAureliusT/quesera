@@ -27,7 +27,7 @@ const activeView = ref<string>('LIST');
             <ProjectTabsList class="h-[1.8em]">
                 <ProjectTabsListItem v-for="(view, index) in views" :key="index" :title="view" @click="() => activeView = view" :is-active="view == activeView" />
             </ProjectTabsList>
-            <ProjectTabsContent :value="activeView" class="h-[calc(100vh-(11*1.8em))]">
+            <ProjectTabsContent :value="activeView">
                 <div v-if="activeView == 'LIST'">
                     <ProjectList :project="project" />
                 </div>

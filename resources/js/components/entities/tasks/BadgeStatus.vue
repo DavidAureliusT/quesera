@@ -12,5 +12,5 @@ const classesStatusCategory: Record<string, string> = {
 </script>
 
 <template>
-    <Badge :class="classesStatusCategory[status_category]" class="mb-[.1em] px-[.4em] py-[.3em] rounded w-full font-bold text-[.7em] uppercase leading-[1em]">{{ status_name }}</Badge>
+    <Badge :class="classesStatusCategory[status_category]" class="mb-[.1em] px-[.8em] py-[.2em] rounded w-full font-bold text-[.7em] uppercase leading-[1em] cursor-pointer">{{ status_name }}</Badge>
 </template>

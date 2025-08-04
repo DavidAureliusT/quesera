@@ -3,7 +3,6 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuRadioGroup,
-    DropdownMenuRadioItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
@@ -14,11 +13,15 @@ import { useToast } from '@/components/ui/toast/use-toast';
 const { toast } = useToast();
 
 interface Props {
-    class?: HTMLAttributes['class'],
+    type: 'text' | 'number'
+    method: 'post' | 'put',
     url: string,
     attributeName: string,
-    inputValue: any,
     title: string,
+    inputValue?: any,
+    class?: HTMLAttributes['class'],
+    useReset?: boolean,
+    placeholder?: string,
 }
 const props = defineProps<Props>()
 
@@ -51,5 +54,5 @@ const postSubmit = () => {
                 <slot name="dropdown-menu-radio-items" />
             </DropdownMenuRadioGroup>
         </DropdownMenuContent>
-    </DropdownMenu>
+    </DropdownMenu>8
 </template>
