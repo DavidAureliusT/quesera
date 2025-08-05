@@ -4,12 +4,10 @@ import { Project, Task } from '@/types';
 import { ChevronUp, ChevronDown, ChevronsUpDown } from "lucide-vue-next";
 // import RowCreateTask from '@/actions/RowCreateTask.vue';
 import AutoSubmitInput from "@/actions/AutoSubmitInput.vue";
-import BadgeStatus from "../tasks/BadgeStatus.vue";
-import AutoSubmitDropdownMenu from "@/actions/AutoSubmitDropdownMenu.vue";
+import BadgeStatus from "@/components/entities/tasks/BadgeStatus.vue";
+import { DropdownMenuRadioItem } from '@/components/ui/dropdown-menu'
 
-import {
-    DropdownMenuRadioItem,
-} from '@/components/ui/dropdown-menu'
+import AutoSubmitDropdownMenu from "@/actions/AutoSubmitDropdownMenu.vue";
 
 const props = defineProps<{ project: Project }>()
 
@@ -101,7 +99,7 @@ function handleUpdateSorting(column: string, order: string) {
                 <ChevronDown @click="handleUpdateSorting('status_id', 'default')" v-if="filters.sorting.status_id == 'descending'" :size="16" class="opacity-80 hover:opacity-100" />
             </div>
         </div>
-        <div class="h-[calc(100vh-(11*1.8em))]">
+        <div class="h-[calc(100vh-(11*1.8em))] overflow-y-scroll">
             <div v-for="(task) in filteredTasks.data" :key="task.key" :task="task" class="flex flex-row hover:bg-white/10 divide-x">
                 <div class="px-[.8em] border-b w-[8em] h-[1.8em] align-middle">
                     <p>{{ task.key }}</p>
@@ -113,12 +111,12 @@ function handleUpdateSorting(column: string, order: string) {
                     <AutoSubmitInput type="number" method="put" :url="route('projects.tasks.update', { project_key: task.key.split('-')[0], task_key: task.key })" attribute-name="point" :input-value="task.point" title="Task Updated" />
                 </div>
                 <div class="items-center place-items-center grid px-[.8em] border-b w-[8em] h-[1.8em]">
-                    <AutoSubmitDropdownMenu type="number" method="put" :url="route('projects.tasks.update', { project_key: task.key.split('-')[0], task_key: task.key })" attribute-name="status_id" :input-value="task.status_id" title="Task Updated">
+                    <AutoSubmitDropdownMenu type="number" method="put" :url="route('projects.tasks.update', { project_key: task.key.split('-')[0], task_key: task.key })" attribute-name="status_id" :input-value="task.status_id.toString()" title="Task Updated">
                         <template #trigger>
                             <BadgeStatus :status_category="task.status_category" :status_name="task.status_name" />
                         </template>
                         <template #dropdown-menu-radio-items>
-                            <DropdownMenuRadioItem v-for="(workflow, index) in project.workflows" :key="index" :value="workflow.id">
+                            <DropdownMenuRadioItem v-for="(workflow, index) in project.workflows" :key="index" :value="workflow.id.toString()">
                                 <div class="px-[.4em] rounded w-fit font-bold text-[1.0em] uppercase leading-[1em]">
                                     <p>{{ workflow.name }}</p>
                                 </div>

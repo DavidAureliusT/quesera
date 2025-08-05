@@ -54,5 +54,5 @@ const postSubmit = () => {
                 <slot name="dropdown-menu-radio-items" />
             </DropdownMenuRadioGroup>
         </DropdownMenuContent>
-    </DropdownMenu>8
+    </DropdownMenu>
 </template>
