@@ -15,7 +15,7 @@ defineProps<{ project?: Project }>()
 
 const views = ['LIST', 'KANBAN']
 
-const activeView = ref<string>('LIST');
+const activeView = ref<string>('KANBAN');
 
 </script>
 
@@ -28,12 +28,8 @@ const activeView = ref<string>('LIST');
                 <ProjectTabsListItem v-for="(view, index) in views" :key="index" :title="view" @click="() => activeView = view" :is-active="view == activeView" />
             </ProjectTabsList>
             <ProjectTabsContent :value="activeView">
-                <div v-if="activeView == 'LIST'">
-                    <ProjectList :project="project" />
-                </div>
-                <div v-else-if="activeView == 'KANBAN'">
-                    <ProjectKanban :project="project" />
-                </div>
+                <ProjectList v-if="activeView == 'LIST'" :project="project" />
+                <ProjectKanban v-else-if="activeView == 'KANBAN'" :project="project" />
                 <div v-else class="place-items-center grid">{{ activeView }}</div>
             </ProjectTabsContent>
         </ProjectTabs>

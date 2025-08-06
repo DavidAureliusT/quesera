@@ -29,7 +29,7 @@ const form = useForm({
     [props.attributeName]: props.inputValue
 })
 
-const postSubmit = () => {
+const submit = () => {
     if (form.isDirty) {
         form.put(props.url, {
             onSuccess: () => {
@@ -46,11 +46,11 @@ const postSubmit = () => {
 
 <template>
     <DropdownMenu>
-        <DropdownMenuTrigger as-child>
+        <DropdownMenuTrigger as-child class="cursor-pointer">
             <slot name="trigger" />
         </DropdownMenuTrigger>
         <DropdownMenuContent class="w-48">
-            <DropdownMenuRadioGroup v-model="form[attributeName]" v-on:vue:updated="postSubmit">
+            <DropdownMenuRadioGroup v-model="form[attributeName]" v-on:vue:updated="submit">
                 <slot name="dropdown-menu-radio-items" />
             </DropdownMenuRadioGroup>
         </DropdownMenuContent>

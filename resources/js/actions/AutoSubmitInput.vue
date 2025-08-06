@@ -31,7 +31,7 @@ const blurActiveElement = () => {
     }
 }
 
-const postSubmit = () => {
+const submit = () => {
     if (form.isDirty) {
         form.submit(props.method, props.url, {
             onSuccess: () => {
@@ -49,7 +49,7 @@ const postSubmit = () => {
 
 <template>
     <form @submit.prevent="blurActiveElement">
-        <input :type="type" v-model="form[attributeName]" @blur="postSubmit" :class="cn('leading-0 w-full', props.class)" :placeholder="placeholder">
+        <input :type="type" v-model="form[attributeName]" @blur="submit" :class="cn('leading-0 w-full', props.class)" :placeholder="placeholder">
         <input type="submit" hidden />
     </form>
 </template>

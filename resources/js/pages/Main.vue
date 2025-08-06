@@ -3,7 +3,7 @@ import { SharedProps } from '@/types';
 
 import NavProject from '@/components/entities/projects/Nav.vue';
 import AppShell from '@/components/AppShell.vue';
-import ProjectRoot from "@/components/entities/projects/ProjectRoot.vue";
+import ProjectViewProvider from "@/components/entities/projects/ProjectRoot.vue";
 
 const sharedProps = defineProps<SharedProps>();
 
@@ -15,7 +15,7 @@ const sharedProps = defineProps<SharedProps>();
             <NavProject />
         </template>
         <template #center>
-            <ProjectRoot :project="sharedProps.project" />
+            <ProjectViewProvider :project="sharedProps.project" />
         </template>
         <template #leftSide>
         </template>
