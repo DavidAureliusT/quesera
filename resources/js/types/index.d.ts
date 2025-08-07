@@ -104,6 +104,7 @@ export interface Task {
     status_id: string;
     status_name: string;
     status_category: string;
+    kanban_order: number;
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;

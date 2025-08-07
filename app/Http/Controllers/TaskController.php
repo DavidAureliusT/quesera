@@ -6,6 +6,10 @@ use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+
 class TaskController extends Controller
 {
     /**
@@ -17,26 +21,43 @@ class TaskController extends Controller
             'summary' => ['required', 'max:120']
         ]);
 
-        $project = Project::where('key', $project_key)->first();
+        // Use a transaction to ensure the entire operation is atomic
+        $task = DB::transaction(function () use ($validated, $project_key) {
+            // Use firstOrFail to automatically handle 404 if project not found
+            $project = Project::where('key', $project_key)->firstOrFail();
 
-        $project->tasks()->save(new Task([
-            'key' => $project->key . '-' . $project->tasks()->count() + 1,
-            'summary' => $validated['summary'],
-            'status_id' => $project->workflows()->first()->id
-        ]));
+            // Get the first workflow or fail gracefully
+            $workflow = $project->workflows()->first();
+            if (!$workflow) {
+                // Or handle this error as you see fit
+                throw new ModelNotFoundException('The project does not have a default workflow.');
+            }
+
+            // --- Correctly calculate counts before creating the task ---
+
+            // Fix operator precedence with parentheses
+            // Use a DB query for efficiency
+            $next_task_number = $project->tasks()->count() + 1;
+            $task_key = $project->key . '-' . $next_task_number;
+
+            // Use a DB query instead of lazy-loading the whole collection
+            $kanban_order = $project->tasks()
+                ->where('status_id', $workflow->id)
+                ->count() + 1;
+
+            // Create and save the new task
+            return $project->tasks()->create([
+                'key'          => $task_key,
+                'summary'      => $validated['summary'],
+                'status_id'    => $workflow->id,
+                'kanban_order' => $kanban_order,
+            ]);
+        });
 
         return to_route(
             route: 'projects.show',
-            parameters: ['project_key' => $project->key]
+            parameters: ['project_key' => $project_key]
         );
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Task $task)
-    {
-        //
     }
 
     /**

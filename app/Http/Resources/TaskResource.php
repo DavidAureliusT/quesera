@@ -29,6 +29,7 @@ class TaskResource extends JsonResource
             'status_id' => $this->status_id,
             'status_name' => $this->status->name,
             'status_category' => $this->status->category,
+            'kanban_order' => $this->kanban_order,
         ];
     }
 }

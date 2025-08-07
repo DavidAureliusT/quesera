@@ -17,6 +17,7 @@ class Task extends Model
         'project_id',
         'status_id',
         'point',
+        'kanban_order'
     ];
 
     /**

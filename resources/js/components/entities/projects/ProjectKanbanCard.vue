@@ -5,7 +5,10 @@
         <div class="p-[.8em]">
             <div class="flex flex-row justify-between items-center">
                 <p><span class="text-white/50">{{ task.key }}</span></p>
-                <BadgeStatus :status_category="task.status_category" :status_name="task.status_name" />
+                <div class="flex flex-row gap-[.8em]">
+                    <BadgeStatus :status_category="task.status_category" :status_name="task.status_name" />
+                    <div class="place-items-center grid border rounded-full w-[1.8em] aspect-square leading-0">{{ task.kanban_order }}</div>
+                </div>
             </div>
             <p>{{ task.summary }}</p>
         </div>

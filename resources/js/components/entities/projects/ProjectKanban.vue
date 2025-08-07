@@ -10,7 +10,7 @@ defineProps<{ project: Project }>()
 <template>
     <div class="flex gap-[.8em]">
         <div v-for="(workflow) in project?.workflows" :key="workflow.id" class="flex-1">
-            <ProjectKanbanColumn :project="project" :workflow="workflow" />
+            <ProjectKanbanColumn :tasks="project.tasks?.filter((task) => task.status_name == workflow.name)" :workflow="workflow" />
         </div>
     </div>
 </template>
