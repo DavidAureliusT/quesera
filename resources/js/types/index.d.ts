@@ -95,6 +95,7 @@ export type Workflow = {
     id: string;
     name: string;
     category: string;
+    tasks?: Task[];
 }
 
 export interface Task {

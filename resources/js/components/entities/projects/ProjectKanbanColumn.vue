@@ -38,7 +38,6 @@ const onDropHandler = (event: DragEvent) => {
 
 const onDragoverHandler = (event: DragEvent) => {
     event.preventDefault();
-
     if (event.target instanceof HTMLElement && event.dataTransfer) {
         const _task_key = event.dataTransfer.getData("task_key");
         const darggingCard = document.getElementById(_task_key + '-card');

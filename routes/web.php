@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KanbanController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SandboxController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::controller(TaskController::class)->group(function () {
         Route::post('/projects/{project_key}/tasks/{status_id?}', 'store')->name('projects.tasks.store');
         Route::put('/projects/{project_key}/tasks/{task_key}', 'update')->name('projects.tasks.update');
+    });
+
+    Route::controller(SandboxController::class)->group(function () {
+        Route::get('/sandbox', 'index')->name('sandbox');
     });
 });
 

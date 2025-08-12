@@ -18,7 +18,8 @@ class WorkflowResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'category' => $this->category,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
+            'tasks' => TaskResource::collection($this->tasks),
         ];
     }
 }
