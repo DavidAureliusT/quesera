@@ -91,6 +91,7 @@ class ProjectController extends Controller
     {
         return Inertia::render('Main', [
             'project' => Project::where('key', $project_key)->first()->toResource(),
+            'bytes' => str()->random(),
         ]);
     }
 

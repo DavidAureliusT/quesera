@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->integer('kanban_order');
+            $table->boolean('is_head')->default(false);
+            $table->unsignedBigInteger('next_id')->nullable(true);
+            $table->foreign('next_id')->references('id')->on('tasks');
         });
     }
 

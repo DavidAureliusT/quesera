@@ -5,10 +5,11 @@ import { Task, Workflow } from '@/types';
 import BadgeStatus from '@/components/entities/tasks/BadgeStatus.vue';
 import { useToast } from '@/components/ui/toast/use-toast';
 import ProjectKanbanCard from "@/components/entities/projects/ProjectKanbanCard.vue";
+import CardCreateTask from "@/actions/CardCreateTask.vue";
 
 const { toast } = useToast();
 
-const props = defineProps<{ tasks: Task[] | undefined, workflow: Workflow }>()
+const props = defineProps<{ project_key: string, tasks: Task[] | undefined, workflow: Workflow, bytes: string }>()
 
 const reactiveTasks = ref<Task[]>(props.tasks || []);
 
@@ -23,10 +24,8 @@ onMounted(() => {
 });
 
 onUpdated(() => {
-    console.log({ [props.workflow.id + '-col']: JSON.stringify(props.tasks) })
+    // console.log({ [props.workflow.id + '-col']: JSON.stringify(props.tasks) })
 });
-
-const classes = "flex flex-col gap-2 bg-white/5 mt-[.4em] p-[.4em] border border-dashed rounded-[1.2em] h-[calc(100vh-(11*1.8em))] overflow-y-scroll";
 
 const onDropHandler = (event: DragEvent) => {
     event.preventDefault();
@@ -48,7 +47,7 @@ const onDragoverHandler = (event: DragEvent) => {
 }
 
 const submitUpdateTaskStatusId = (task_key: string) => {
-    form.put(route('projects.tasks.update', { project_key: task_key.split('-')[0], task_key: task_key }), {
+    form.put(route('projects.tasks.update', { project_key: props.project_key, task_key: task_key }), {
         onSuccess: () => {
             toast({
                 title: "Task Updated",
@@ -62,14 +61,19 @@ const submitUpdateTaskStatusId = (task_key: string) => {
     })
 }
 
+const classes = "flex-1 flex flex-col gap-2 bg-white/5 mt-[.4em] p-[.4em] border border-dashed rounded-[1.2em] h-[calc(100vh-(11*1.8em))] overflow-y-scroll";
 
 </script>
 
 <template>
-    <div>
-        <BadgeStatus :status_category="workflow.category" :status_name="workflow.name" />
-    </div>
-    <div :id="workflow.id + '-column'" @drop="onDropHandler" @dragover="onDragoverHandler" :class="classes">
-        <ProjectKanbanCard v-for="(task, index) in reactiveTasks" :key="index" :task="task" />
+    <div class="flex-none w-[20em]">
+        <div class="flex justify-between">
+            <BadgeStatus :status_category="workflow.category" :status_name="workflow.name" />
+            <p class="text-white">bytes: {{ bytes }}</p>
+        </div>
+        <div :id="workflow.id + '-column'" @drop="onDropHandler" @dragover="onDragoverHandler" :class="classes">
+            <ProjectKanbanCard v-for="(task, index) in reactiveTasks" :key="index" :task="task" />
+            <CardCreateTask :project_key="project_key" :status_id="workflow.id.toString()" />
+        </div>
     </div>
 </template>

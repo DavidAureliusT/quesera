@@ -12,16 +12,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->only(['index', 'store', 'show', 'update', 'destroy'])
         ->parameters(['projects' => 'project_key']);
 
-    Route::resource('projects.tasks', TaskController::class)
-        ->only(['store', 'update', 'destroy'])
-        ->parameters([
-            'projects' => 'project_key',
-            'tasks' => 'task_key'
-        ]);
-
-    Route::resource('projects.kanban', KanbanController::class)
-        ->only(['update'])
-        ->parameters(['projects' => 'project_key', 'kanban' => null]);
+    Route::controller(TaskController::class)->group(function () {
+        Route::post('/projects/{project_key}/tasks/{status_id?}', 'store')->name('projects.tasks.store');
+        Route::put('/projects/{project_key}/tasks/{task_key}', 'update')->name('projects.tasks.update');
+    });
 });
 
 Route::get('/server', fn() => $_SERVER);

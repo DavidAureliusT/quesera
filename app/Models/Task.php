@@ -17,7 +17,9 @@ class Task extends Model
         'project_id',
         'status_id',
         'point',
-        'kanban_order'
+        'kanban_order',
+        'is_head',
+        'next_id'
     ];
 
     /**
@@ -38,5 +40,15 @@ class Task extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(Workflow::class, 'status_id', 'id');
+    }
+
+    /**
+     * Get the next that owns the Task
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function next(): BelongsTo
+    {
+        return $this->belongsTo(Task::class, 'next_id', 'id');
     }
 }

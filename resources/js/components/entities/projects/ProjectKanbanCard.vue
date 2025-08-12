@@ -1,14 +1,14 @@
 <template>
     <div :id="task.key + '-card'" draggable="true" @dragstart="onDragStartHandler" @dragend="onDragEndHandler" :class="{
-        'opacity-50': isDragging
-    }" class="bg-[var(--primary-foreground)] border border-white/10 rounded-2xl transition-all cursor-pointer">
+        'opacity-50': isDragging,
+        'border-white/30 bg-white/5 overflow-clip border text-white/80': 'To do' == task.status_category,
+        'border-process/30 bg-process/5 overflow-clip border text-process/80': 'In Progress' == task.status_category,
+        'border-primary/30 bg-primary/5 overflow-clip border text-primary/80': 'Done' == task.status_category,
+    }" class="bg-[var(--primary-foreground)] rounded-2xl transition-all cursor-pointer">
         <div class="p-[.8em]">
             <div class="flex flex-row justify-between items-center">
                 <p><span class="text-white/50">{{ task.key }}</span></p>
-                <div class="flex flex-row gap-[.8em]">
-                    <BadgeStatus :status_category="task.status_category" :status_name="task.status_name" />
-                    <div class="place-items-center grid border rounded-full w-[1.8em] aspect-square leading-0">{{ task.kanban_order }}</div>
-                </div>
+                <div class="place-items-center grid border rounded-full w-[1.8em] aspect-square leading-0"></div>
             </div>
             <p>{{ task.summary }}</p>
         </div>
@@ -22,7 +22,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { Task } from '@/types';
-import BadgeStatus from '../tasks/BadgeStatus.vue';
 
 const props = defineProps<{ task: Task }>()
 

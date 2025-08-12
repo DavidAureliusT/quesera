@@ -2,6 +2,7 @@ import type { LucideIcon } from 'lucide-vue-next';
 import type { Config } from 'ziggy-js';
 
 export interface SharedProps {
+    bytes?: string,
     project?: Project,
     profile?: {
         mustVerifyEmail: boolean;
@@ -90,7 +91,7 @@ export interface Access {
     role_name: string;
 }
 
-export interface Workflow {
+export type Workflow = {
     id: string;
     name: string;
     category: string;
@@ -104,7 +105,8 @@ export interface Task {
     status_id: string;
     status_name: string;
     status_category: string;
-    kanban_order: number;
+    is_head?: boolean;
+    next_id?: number;
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
