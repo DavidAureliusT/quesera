@@ -58,6 +58,12 @@ const clearAllIndicator = () => {
     onDragOverAsNextArray.forEach(element => {
         element.classList.remove('onDragOverAsNext');
     });
+
+    const onDragOverColumnElements = document.getElementsByClassName('onDragOverColumn');
+    const onDragOverColumnArray = Array.from(onDragOverColumnElements);
+    onDragOverColumnArray.forEach(element => {
+        element.classList.remove('onDragOverColumn');
+    });
 }
 
 </script>
