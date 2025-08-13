@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div class="flex items-center gap-[.4em] px-[.4em] border-y border-dashed uppercase">
+    <div class="flex items-center border-y border-dashed divide-x divide-dashed overflow-clip uppercase">
         <slot />
     </div>
 </template>

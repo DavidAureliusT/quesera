@@ -24,7 +24,6 @@ const onDragLeaveColumnHandler = (event: DragEvent) => {
 
 <template>
     <div class="flex flex-col h-full">
-        <!-- Workflow Id -->
         <div class="flex flex-row gap-[.4em] py-[.8em]">
             <BadgeStatus :status_category="workflow.category" :status_name="workflow.name" />
             <div class="place-items-center grid border rounded-full h-[1.2em] aspect-square">
@@ -34,6 +33,7 @@ const onDragLeaveColumnHandler = (event: DragEvent) => {
         <div class="flex flex-col flex-1 border border-dashed w-[370px] overflow-scroll">
             <slot />
             <div :key="workflow.id" :class="{ 'onDragOverColumn': isDragoverOnColumn }" class="flex-1 bg-amber-700/5" @dragover="(e) => onDragOverColumnHandler(e)" @dragleave="(e) => onDragLeaveColumnHandler(e)"></div>
+
         </div>
     </div>
 </template>

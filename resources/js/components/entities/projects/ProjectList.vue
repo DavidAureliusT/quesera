@@ -72,7 +72,7 @@ function handleUpdateSorting(column: string, order: string) {
 </script>
 
 <template>
-    <div class="flex flex-col border rounded-lg overflow-clip">
+    <div class="flex flex-col mt-[1.8em] border-y">
         <div class="flex flex-row bg-sidebar divide-x">
             <div class="flex flex-none justify-between items-center px-[.8em] border-b w-[8em] h-[1.8em] align-middle">
                 <p class="text-white/50">Key</p>

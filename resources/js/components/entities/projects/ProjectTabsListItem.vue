@@ -6,5 +6,5 @@ defineProps<{
 </script>
 
 <template>
-    <div class="hover:bg-primary px-[.4em] border border-dashed rounded font-bold text-[.8em] cursor-pointer" :class="{ 'bg-primary ': isActive, 'bg-primary/5': !isActive }">{{ title }}</div>
+    <div class="p-[.4em] px-[1.2em] last:border-r border-dashed text-[.8em] cursor-pointer" :class="{ 'font-black text-white': isActive, 'font-black text-white/50': !isActive }">{{ title }}</div>
 </template>

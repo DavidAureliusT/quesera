@@ -11,7 +11,7 @@ import ProjectTabsListItem from './ProjectTabsListItem.vue';
 import ProjectTabsContent from './ProjectTabsContent.vue';
 import ProjectKanban from './ProjectKanban.vue';
 
-defineProps<{ project?: Project, bytes?: string }>()
+defineProps<{ project?: Project, bytes: string }>()
 
 const views = ['LIST', 'KANBAN']
 

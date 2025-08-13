@@ -15,7 +15,7 @@ const sharedProps = defineProps<SharedProps>();
             <NavProject />
         </template>
         <template #center>
-            <ProjectViewProvider :project="sharedProps.project" :bytes="sharedProps.bytes" />
+            <ProjectViewProvider :project="sharedProps.project" :bytes="sharedProps.bytes!" />
         </template>
         <template #leftSide>
         </template>
