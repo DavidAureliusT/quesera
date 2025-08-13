@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import { ref, watchEffect } from "vue";
+import { ref } from "vue";
 import { Task } from '@/types';
 
-interface Props {
-    task: Task
-}
+interface Props { task: Task }
 
-const props = defineProps<Props>()
-
-const cardUnder = ref<HTMLElement | null>()
+defineProps<Props>()
 
 const isDragging = ref<boolean>(false);
 const isDragoverOnPrev = ref<boolean>(false);
@@ -22,23 +18,16 @@ const onDragStartHandler = (event: DragEvent, task: Task) => {
     }
 }
 
-
-
 const onDragOverHandler = (event: DragEvent, taskOver: Task, position: 'previous' | 'next') => {
     event.preventDefault();
+    if (position == 'previous') {
+        isDragoverOnPrev.value = true;
+        isDragoverOnNext.value = false;
 
-    if (event.target instanceof HTMLElement && event.dataTransfer) {
-        if (position == 'previous') {
-            isDragoverOnPrev.value = true;
-
-            isDragoverOnNext.value = false;
-
-        }
-        if (position == 'next') {
-            isDragoverOnPrev.value = false;
-
-            isDragoverOnNext.value = true;
-        }
+    }
+    if (position == 'next') {
+        isDragoverOnPrev.value = false;
+        isDragoverOnNext.value = true;
     }
 }
 
@@ -53,21 +42,23 @@ const onDragEndHandler = (event: DragEvent) => {
     isDragging.value = false;
     isDragoverOnPrev.value = false;
     isDragoverOnNext.value = false;
+
+    clearAllIndicator();
 }
 
-watchEffect(() => {
-    cardUnder.value = document.getElementById(props.task.key + '-card');
-    if (isDragoverOnPrev.value == true) {
-        cardUnder.value?.classList.add('onDragOverAsPrev');
-    } else {
-        cardUnder.value?.classList.remove('onDragOverAsPrev')
-    }
-    if (isDragoverOnNext.value == true) {
-        cardUnder.value?.classList.add('onDragOverAsNext');
-    } else {
-        cardUnder.value?.classList.remove('onDragOverAsNext')
-    }
-})
+const clearAllIndicator = () => {
+    const onDragOverAsPrevElements = document.getElementsByClassName('onDragOverAsPrev');
+    const onDragOverAsPrevArray = Array.from(onDragOverAsPrevElements);
+    onDragOverAsPrevArray.forEach(element => {
+        element.classList.remove('onDragOverAsPrev');
+    });
+
+    const onDragOverAsNextElements = document.getElementsByClassName('onDragOverAsNext');
+    const onDragOverAsNextArray = Array.from(onDragOverAsNextElements);
+    onDragOverAsNextArray.forEach(element => {
+        element.classList.remove('onDragOverAsNext');
+    });
+}
 
 </script>
 
@@ -76,7 +67,7 @@ watchEffect(() => {
         <div class="bg-black p-[.4em] border rounded-2xl overflow-clip">
             <pre>{{ task }}</pre>
 
-            <div :id="task.key + '-card'" class="absolute inset-0 flex flex-col bg-black/50 border-y border-transparent text-foreground" @dragleave="onDragLeaveHandler">
+            <div :id="task.key + '-card'" :class="{ 'onDragOverAsPrev': isDragoverOnPrev, 'onDragOverAsNext': isDragoverOnNext }" class="absolute inset-0 flex flex-col bg-black/50 border-y border-transparent text-foreground" @dragleave="onDragLeaveHandler">
                 <div class="flex-1 place-items-center grid" @dragover="(e) => onDragOverHandler(e, task, 'previous')">
                     <pre>Prev</pre>
                 </div>
@@ -84,7 +75,6 @@ watchEffect(() => {
                     <pre>Next</pre>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
