@@ -1,6 +1,12 @@
 <template>
-    <div draggable="true" @dragstart="(e) => onDragStartHandler(e, task)" @dragend="(e) => onDragEndHandler(e)" class="p-[.2em]">
-        <div class="bg-black border rounded-[.8em] overflow-clip">
+    <div :id="task.key + '-card'" draggable="true" @dragstart="(e) => onDragStartHandler(e, task)" @dragend="(e) => onDragEndHandler(e)" class="p-[.2em]">
+        <div class="relative bg-black border rounded-[.8em] overflow-clip">
+            <div :class="{ 'onDragOverAsPrev': isDragoverOnPrev, 'onDragOverAsNext': isDragoverOnNext }" class="-z-10 absolute inset-0 flex flex-col border-y border-transparent text-foreground" @dragleave="onDragLeaveHandler">
+                <div class="flex-1 place-items-center grid" @dragover="(e) => onDragOverHandler(e, task, 'previous')">
+                </div>
+                <div class="flex-1 place-items-center grid" @dragover="(e) => onDragOverHandler(e, task, 'next')">
+                </div>
+            </div>
             <div :class="{
                 'opacity-50': isDragging,
                 'border-white/30 bg-white/5 text-white/80': 'To do' == task.status_category,
@@ -27,7 +33,7 @@
 import { ref } from "vue";
 import { Task } from '@/types';
 
-const props = defineProps<{ task: Task }>()
+defineProps<{ task: Task }>()
 
 const isDragging = ref<boolean>(false);
 const isDragoverOnPrev = ref<boolean>(false);

@@ -20,6 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::controller(SandboxController::class)->group(function () {
         Route::get('/sandbox', 'index')->name('sandbox');
+        Route::get('/sandbox/linking/{project_key}', 'linking')->name('sandbox.linking');
     });
 });
 

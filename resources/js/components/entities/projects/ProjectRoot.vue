@@ -28,9 +28,9 @@ const activeView = ref<string>('KANBAN');
                 <ProjectTabsListItem v-for="(view, index) in views" :key="index" :title="view" @click="() => activeView = view" :is-active="view == activeView" />
             </ProjectTabsList>
             <ProjectTabsContent>
-                <ProjectList v-if="activeView == 'LIST'" :project="project" />
-                <ProjectKanban v-else-if="activeView == 'KANBAN'" :project="project" :bytes="bytes" />
-                <div v-else class="place-items-center grid">{{ activeView }}</div>
+                <ProjectList :project="project" v-if="activeView == 'LIST'" />
+                <ProjectKanban :project="project" v-else-if="activeView == 'KANBAN'" />
+                <div class="place-items-center grid" v-else>{{ activeView }}</div>
             </ProjectTabsContent>
         </ProjectTabs>
     </div>
