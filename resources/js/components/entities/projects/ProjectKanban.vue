@@ -5,7 +5,7 @@ import { usePage } from '@inertiajs/vue3'
 import { Project } from '@/types';
 // import { Button } from "@/components/ui/button";
 import BadgeStatus from '@/components/entities/tasks/BadgeStatus.vue';
-// import { useToast } from '@/components/ui/toast/use-toast';
+import { useToast } from '@/components/ui/toast/use-toast';
 
 interface Props {
     project: Project
@@ -16,7 +16,7 @@ defineProps<Props>();
 
 const page = usePage();
 
-// const { toast } = useToast();
+const { toast } = useToast();
 
 const showOverlay = ref(false);
 
@@ -31,14 +31,38 @@ const showOverlay = ref(false);
 //     })
 // }
 
-const handleCardOnDragStart = () => {
+
+
+const handleCardOnDragStart = (e: DragEvent) => {
     showOverlay.value = !showOverlay.value;
+    if (e.target instanceof HTMLElement && e.dataTransfer instanceof DataTransfer) {
+        e.dataTransfer.clearData();
+        e.dataTransfer.setData("text/plain", e.target.id)
+    }
 }
 const handleCardOnDragEnd = (e: DragEvent) => {
     e.preventDefault();
     showOverlay.value = !showOverlay.value;
     clearAllIndicator();
 }
+
+const showOnToast = (message?: string) => {
+    toast({
+        title: 'TaskCard Dropped',
+        description: message,
+    });
+}
+
+const handleCardOnDropOverlay = (e: DragEvent) => {
+    e.preventDefault()
+    if (e.currentTarget instanceof HTMLElement && e.dataTransfer instanceof DataTransfer) {
+        const elementId = e.currentTarget.id;
+        const cardId = e.dataTransfer.getData("text/plain");
+        showOnToast(cardId + ' on ' + elementId);
+    }
+}
+
+const handleCardOnDragEnterOverlay = (e: DragEvent) => { e.preventDefault() }
 
 const handleCardOnDragOverHeadOverlay = (e: DragEvent, workflow_id: string) => {
     e.preventDefault();
@@ -56,7 +80,6 @@ const handleCardOnDragLeaveOverlay = (e: DragEvent) => {
     e.preventDefault();
     clearAllIndicator();
 }
-
 const clearAllIndicator = () => {
     const indicatorElement = document.getElementsByClassName('active-indicator');
     const indicatorElementArray = Array.from(indicatorElement);
@@ -82,7 +105,7 @@ const clearAllIndicator = () => {
                 <div :id="workflow.id + '-head-indicator'" class="mt-[.3em] rounded-[10pt] h-[.2em]"></div>
 
                 <!-- Task Card -->
-                <div v-for="(task, index) in workflow.tasks" :key="index" draggable="true" @dragstart="handleCardOnDragStart" @dragend="handleCardOnDragEnd">
+                <div v-for="(task, index) in workflow.tasks" :key="index" :id="task.key" draggable="true" @dragstart="(e) => handleCardOnDragStart(e)" @dragend="handleCardOnDragEnd">
                     <div class="bg-black border rounded-[5pt] h-[130px] overflow-clip">
                         <div class="flex flex-col justify-between p-[1.2em] h-full">
                             <BadgeStatus :status_category="workflow.category" :status_name="workflow.name" />
@@ -110,14 +133,11 @@ const clearAllIndicator = () => {
                 <!-- Overlay -->
                 <div class="absolute inset-0" :class="{ '-z-10': !showOverlay, 'z-20': showOverlay }">
                     <div class="flex flex-col h-full overflow-y-scroll">
-                        <div class="bg-primary/5 border-y" :class="{
-                            'flex-1': workflow.tasks!.length == 0,
-                            'h-[calc(60px+1.0em)]': workflow.tasks!.length != 0,
-                        }" @dragover="(e) => handleCardOnDragOverHeadOverlay(e, workflow.id)" @dragleave="(e) => handleCardOnDragLeaveOverlay(e)"></div>
-                        <div v-for="(task, index) in workflow.tasks" :key="index" class="p-[1.8em] border-y font-black" :class="{
+                        <div :id="workflow.name + '-head-dropzone'" :class="workflow.tasks!.length == 0 ? 'flex-1' : 'h-[calc(60px+1.0em)]'" class="bg-primary/5 border-y" @drop="(e) => handleCardOnDropOverlay(e)" @dragenter="(e) => handleCardOnDragEnterOverlay(e)" @dragover="(e) => handleCardOnDragOverHeadOverlay(e, workflow.id)" @dragleave="(e) => handleCardOnDragLeaveOverlay(e)"></div>
+                        <div v-for="(task, index) in workflow.tasks" :key="index" :id="workflow.name + '-next-' + task.key + '-dropzone'" class="p-[1.8em] border-y font-black" :class="{
                             'bg-red-500/5 h-[calc(130px+.8em)] flex-none': index < workflow.tasks!.length - 1,
                             'flex-1 bg-blue-900/50 ': index == workflow.tasks!.length - 1,
-                        }" @dragover="(e) => handleCardOnDragOverNextOverlay(e, workflow.id, task.key)" @dragleave="(e) => handleCardOnDragLeaveOverlay(e)">
+                        }" @drop="(e) => handleCardOnDropOverlay(e)" @dragenter="(e) => handleCardOnDragEnterOverlay(e)" @dragover="(e) => handleCardOnDragOverNextOverlay(e, workflow.id, task.key)" @dragleave="(e) => handleCardOnDragLeaveOverlay(e)">
                         </div>
                     </div>
                 </div>
