@@ -15,7 +15,7 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, String $project_key, String $status_id = "")
+    public function store(Request $request, String $project_key, String $status_id = '')
     {
         $validated = $request->validate([
             'summary' => ['required', 'max:120'],
@@ -26,7 +26,7 @@ class TaskController extends Controller
         $project->tasks()->save(new Task([
             'key' => $project->key . '-' . $project->tasks()->count() + 1,
             'summary' => $validated['summary'],
-            'status_id' => $status_id ?? $project->workflows()->first()->id
+            'status_id' => $status_id != '' ? $status_id : $project->workflows()->first()->id
         ]));
 
         return to_route(

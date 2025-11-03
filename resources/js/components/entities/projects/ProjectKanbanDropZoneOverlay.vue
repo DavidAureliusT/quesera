@@ -6,10 +6,10 @@ interface Props {
     task_key?: string,
 }
 interface Emits {
-    'drop': [event: DragEvent],
-    'dargenter': [event: DragEvent],
-    'dragover': [event: DragEvent, workflow_id: string],
-    'dragleave': [event: DragEvent],
+    drop: [event: DragEvent],
+    dargenter: [event: DragEvent],
+    dragover: [event: DragEvent, workflow_id: string],
+    dragleave: [event: DragEvent],
 }
 defineProps<Props>()
 const emit = defineEmits<Emits>()
